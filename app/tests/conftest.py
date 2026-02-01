@@ -2,9 +2,10 @@
 Pytest configuration and fixtures for BookingOpt tests
 """
 
-import pytest
 import json
 from pathlib import Path
+
+import pytest
 
 
 @pytest.fixture

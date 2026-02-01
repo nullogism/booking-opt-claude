@@ -3,23 +3,22 @@ BookingOpt API - Redis Queue Based
 Accepts room optimization requests and processes via worker queue
 """
 
-import os
 import logging
-from typing import Optional, Dict, Any
+import os
 from datetime import datetime
+from typing import Any
 
 from fastapi import FastAPI, HTTPException, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-# Import job queue functions
 from job_queue import (
+    JobResult,
+    JobStatus,
+    cancel_job,
     enqueue_optimization,
     get_job_status,
-    cancel_job,
-    JobStatus,
-    JobResult
 )
 
 # Logging setup
@@ -66,7 +65,7 @@ class ReservationInput(BaseModel):
 class RoomInput(BaseModel):
     """Individual room in the hotel"""
     RoomNumber: str
-    RoomType: Optional[str] = None
+    RoomType: str | None = None
     AdjacentRooms: list[str] = Field(default_factory=list)
 
 
@@ -79,7 +78,7 @@ class OptimizationRequest(BaseModel):
     MinimumStay: float = Field(default=1.0, description="Minimum stay requirement in days")
     Reservations: list[ReservationInput] = Field(..., description="List of reservations to optimize")
     NewReservations: list[ReservationInput] = Field(default_factory=list, description="New reservations to add")
-    MinimumStayByDay: Dict[str, float] = Field(default_factory=dict, description="Day-specific minimum stay rules")
+    MinimumStayByDay: dict[str, float] = Field(default_factory=dict, description="Day-specific minimum stay rules")
     Rooms: list[RoomInput] = Field(..., description="List of available rooms")
 
     class Config:
@@ -106,11 +105,11 @@ class JobResponse(BaseModel):
     """Response for job status queries"""
     job_id: str
     status: str
-    progress: Optional[int] = None
-    result: Optional[Dict[str, Any]] = None
-    error: Optional[str] = None
-    message: Optional[str] = None
-    problem_id: Optional[str] = None
+    progress: int | None = None
+    result: dict[str, Any] | None = None
+    error: str | None = None
+    message: str | None = None
+    problem_id: str | None = None
 
 
 class HealthResponse(BaseModel):
@@ -125,7 +124,7 @@ class HealthResponse(BaseModel):
 # =============================================================
 
 async def get_current_user(
-    x_user_id: Optional[str] = Header(None, alias="X-User-ID")
+    x_user_id: str | None = Header(None, alias="X-User-ID")
 ) -> str:
     """
     Extract user ID from request headers.

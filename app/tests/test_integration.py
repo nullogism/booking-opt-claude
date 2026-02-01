@@ -3,11 +3,12 @@ Integration tests for BookingOpt end-to-end workflow
 Requires Docker Compose services running
 """
 
+import json
+import time
+from pathlib import Path
+
 import pytest
 import requests
-import time
-import json
-from pathlib import Path
 
 # Base URL for the API
 BASE_URL = "http://localhost"
