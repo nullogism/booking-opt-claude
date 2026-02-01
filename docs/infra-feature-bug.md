@@ -1,7 +1,7 @@
 # Infrastructure Features & Bugs
 
-**Last Updated**: 2026-01-31 (Evening Session)
-**Status**: Ready for Docker Build Testing
+**Last Updated**: 2026-02-01 (CI/CD Complete)
+**Status**: ✅ Phase 1 & 2 Complete - Ready for GCP VM Deployment
 
 Track infrastructure, deployment, CI/CD, and operations tasks.
 
@@ -39,13 +39,14 @@ Track infrastructure, deployment, CI/CD, and operations tasks.
   - ⏳ User will create .env from template when needed
   - **Completed**: 2026-01-31
 
-- [ ] **Test local Docker Compose deployment** (P0) - PENDING DOCKER INSTALL
-  - ⏳ Docker Desktop installing (user restarting)
-  - ⏳ `docker compose build` not yet run
-  - ⏳ Verify all services healthy
-  - ⏳ Test API endpoints (health, optimize, jobs)
-  - **Next**: After Docker Desktop restart
-  - **See**: docs/RESTART-INSTRUCTIONS.md
+- [x] **Test local Docker Compose deployment** (P0) - COMPLETED
+  - ✅ Docker Desktop installed and verified
+  - ✅ All services built and running
+  - ✅ Services health checks passing
+  - ✅ API endpoints tested (health, optimize, jobs)
+  - ✅ End-to-end optimization workflow validated
+  - **Completed**: 2026-02-01
+  - **See**: docs/TESTING-CHECKLIST.md
 
 #### Nginx Configuration
 - [x] **Rate limits configured** (P1) - COMPLETED
@@ -107,8 +108,9 @@ Track infrastructure, deployment, CI/CD, and operations tasks.
   - ✅ Docker Build stage (buildx with caching)
   - ✅ Integration Tests stage (docker compose)
   - ✅ Security Scan stage (Trivy, Safety)
-  - **Completed**: 2026-01-31
-  - **Next**: Will run automatically on next push
+  - ✅ **All checks passing** in CI/CD pipeline
+  - **Completed**: 2026-02-01
+  - **See**: https://github.com/nullogism/booking-opt-claude/actions
 
 - [ ] **Set up GitHub Container Registry (GHCR)** (P1) - DEFERRED
   - ⏳ Currently building locally
@@ -399,6 +401,14 @@ _None currently_
 ---
 
 ## Technical Debt
+
+- [ ] **Black code formatting** (P3)
+  - 5 files need formatting (API, worker, tests)
+  - Currently non-blocking (continue-on-error in CI)
+  - Files: main.py, job_queue.py, worker.py, test_api.py, test_integration.py
+  - **Impact**: Code style inconsistency
+  - **Estimated Effort**: 15 minutes
+  - **Assignee**: TBD
 
 - [ ] **Manual deployment process** (P1)
   - Current: Manual SSH and docker-compose up
