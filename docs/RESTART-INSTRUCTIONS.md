@@ -1,41 +1,126 @@
-# RESTART INSTRUCTIONS - BookingOpt Testing Session
+# RESTART INSTRUCTIONS - BookingOpt Project
 
-**Last Updated**: 2026-01-31
-**Session Status**: Ready for Docker Desktop Testing
+**Last Updated**: 2026-02-01
+**Session Status**: ✅ Phase 1 & 2 Complete - Ready for GCP VM Deployment
 **Next Claude Instance**: Start here to pick up where we left off
+
+---
 
 ## 🎯 Current Project State
 
-### What's Been Completed ✅
+### ✅ What's Been Completed
 
-1. **Hybrid Integration Complete** (Commit: 0e9b6be)
-   - API service: FastAPI with Redis Queue integration
-   - Worker service: RQ Worker with scipy-based optimizer
-   - Core optimizer modules copied from BookingOpt-Prod
-   - Docker Compose configuration updated
-   - All infrastructure in place
+#### Phase 1: Local Docker Build & Validation (COMPLETE - 2026-02-01)
+- ✅ Docker Desktop installed and verified
+- ✅ All Docker images build successfully (API + Worker)
+- ✅ All 4 services running and healthy (nginx, api, worker, redis)
+- ✅ End-to-end optimization workflow validated
+- ✅ Health endpoint tested and working
+- ✅ Optimization jobs processing correctly with valid results
+- ✅ Manual testing via Postman completed (see [docs/TESTING-CHECKLIST.md](TESTING-CHECKLIST.md))
 
-2. **Testing Infrastructure Complete** (Commit: 2e73a53)
-   - Unit tests (pytest) for API endpoints
-   - Integration tests for end-to-end workflows
-   - GitHub Actions CI/CD pipeline
-   - Linting (Ruff), formatting (Black), type checking (MyPy)
-   - Helper scripts (run-tests.sh, quick-test.sh)
-   - Comprehensive TESTING.md documentation
+**Key Fixes During Phase 1:**
+- Fixed nginx proxy_params_common mount issue
+- Fixed RQ 2.x compatibility (removed Connection import)
+- Fixed optimizer import paths (absolute → relative imports)
+- Added missing pyscipopt dependency
+- Added missing Rooms field to OptimizationRequest model
 
-3. **Repository Status**
-   - GitHub: https://github.com/nullogism/booking-opt-claude.git
-   - Branch: main
-   - All code committed and pushed
-   - CI/CD workflow ready (will run on next push)
+#### Phase 2: CI/CD Pipeline (COMPLETE - 2026-02-01)
+- ✅ **GitHub Actions pipeline fully operational**: https://github.com/nullogism/booking-opt-claude/actions
+- ✅ All CI stages passing:
+  - Lint & Type Check (ruff with modern type hints)
+  - Unit Tests (pytest)
+  - Docker Build (buildx with caching)
+  - Integration Tests (full end-to-end workflow)
+  - Security Scan (Trivy + SARIF upload)
+- ✅ Latest successful run: https://github.com/nullogism/booking-opt-claude/actions/runs/21566705574
 
-### What's Pending ⏳
+**Key Fixes During Phase 2:**
+- Added `security-events: write` permission for SARIF upload
+- Fixed all linting errors (modernized type hints: `Optional[X]` → `X | None`, `Dict` → `dict`)
+- Removed unused imports and fixed import ordering
+- Marked Redis-dependent unit tests to skip (moved to integration tests)
+- Excluded legacy optimizer code from linting/formatting (uses tabs, different style)
+- Made black formatting non-blocking (5 files need formatting - low priority, tracked in backlog)
 
-1. **Docker Desktop Installation** (User restarting computer)
-2. **Local Docker Build Testing** - PRIMARY NEXT TASK
-3. **End-to-End Job Testing** - Verify optimizer produces valid results
-4. **Visualization Validation** - Confirm booking arrangement outputs are correct
-5. **CI/CD Practice Deployment** - Deploy to VM in datacenter
+### 📊 Project Status Summary
+
+| Phase | Status | Completion Date |
+|-------|--------|----------------|
+| Phase 1: Docker Build & Validation | ✅ Complete | 2026-02-01 |
+| Phase 2: CI/CD Pipeline | ✅ Complete | 2026-02-01 |
+| Phase 3: GCP VM Deployment | 🎯 **NEXT** | TBD |
+| Phase 4: European Datacenter | ⏳ Pending | TBD |
+
+---
+
+## 🎯 NEXT STEPS: Phase 3 - GCP VM Deployment
+
+### Objective
+Deploy the application to a Google Cloud VM to test the deployment process before moving to the European datacenter.
+
+### Why GCP First?
+1. Practice deployment in a controlled environment
+2. Validate deployment scripts and procedures
+3. Test the application in a fresh hosting environment
+4. Iron out any issues before production datacenter deployment
+5. Ensure GDPR compliance (europe-west1 region)
+
+### Phase 3 Plan
+
+#### 3.1 Create GCP VM Instance
+**Tasks:**
+- [ ] Create GCP VM in europe-west1-b (Belgium) region
+  - Machine type: e2-small (2 vCPU, 2GB RAM)
+  - OS: Debian 11 or Container-Optimized OS
+  - Disk: 20GB standard persistent disk
+  - Firewall: Allow HTTP (80) and HTTPS (443)
+- [ ] Configure SSH access
+- [ ] Document VM details (IP address, credentials)
+
+#### 3.2 Manual Deployment (First Time)
+**Tasks:**
+- [ ] SSH to GCP VM
+- [ ] Install Docker Engine and Docker Compose
+- [ ] Clone repository or copy files
+- [ ] Configure environment (.env file)
+- [ ] Build and start services: `docker compose up -d`
+- [ ] Test all endpoints (health, optimize, jobs)
+- [ ] Verify end-to-end workflow
+
+**Estimated Time**: 2-3 hours
+
+#### 3.3 Create Automated Deployment Workflow
+**Tasks:**
+- [ ] Create `.github/workflows/deploy.yml`
+- [ ] Configure GitHub Secrets (SSH keys, GCP credentials)
+- [ ] Implement deployment stages:
+  - Build and tag Docker images
+  - Push to container registry (GHCR)
+  - SSH to VM and pull latest images
+  - Restart services with zero downtime
+  - Run smoke tests
+  - Rollback on failure
+- [ ] Test automated deployment
+
+**Estimated Time**: 4-6 hours
+
+#### 3.4 Validate Deployment
+**Tasks:**
+- [ ] Submit optimization jobs to GCP VM
+- [ ] Monitor logs and performance
+- [ ] Test rate limiting
+- [ ] Verify data persistence (Redis)
+- [ ] Document any issues or improvements
+
+**Success Criteria:**
+- Application accessible via VM's external IP
+- Optimization jobs process correctly
+- No errors in logs
+- Performance acceptable (< 60 seconds per job)
+
+---
 
 ## 📋 Architecture Overview
 
@@ -47,378 +132,265 @@ Internet → Nginx:80 → API:8000 → Redis:6379 → Worker (Scipy Optimizer)
                                         Room Assignment Results
 ```
 
-**Key Files:**
-- `app/api/main.py` - FastAPI REST API
-- `app/worker/worker.py` - RQ worker that calls optimizer
-- `app/worker/optimizer/SolverRunner.py` - Core optimization logic
-- `hotel-optimizer-infra/docker-compose.yml` - Service orchestration
-- `app/tests/test_data/` - Sample JSON inputs
+**Services:**
+- **nginx**: Reverse proxy with rate limiting and security headers
+- **api**: FastAPI REST API for job submission and status
+- **worker**: RQ Worker running scipy-based optimizer
+- **redis**: Job queue and result storage (1 hour TTL)
 
-**Input Format:**
-```json
-{
-  "ProblemId": "...",
-  "MinimumStay": 5.0,
-  "Reservations": [{"Name": "1", "Arrival": "2026-02-20", "Length": 9.0, ...}],
-  "NewReservations": [],
-  "MinimumStayByDay": {}
-}
-```
+**Key Technologies:**
+- FastAPI (async Python web framework)
+- Redis Queue (RQ) for async job processing
+- scipy + pyscipopt for optimization
+- nginx for reverse proxy and rate limiting
+- Docker Compose for orchestration
 
-## 🚀 IMMEDIATE NEXT STEPS
+---
 
-### Step 1: Verify Docker Desktop
+## 📁 Important Files to Review
 
-```powershell
-# User should run after restart
-docker --version
-docker compose version
-```
+### Documentation
+- **[docs/Production-readiness-v1.md](Production-readiness-v1.md)** - Complete production roadmap with Phase 1 & 2 marked complete
+- **[docs/TESTING-CHECKLIST.md](TESTING-CHECKLIST.md)** - Comprehensive testing scenarios (Tests 1-3 passed)
+- **[docs/infra-feature-bug.md](infra-feature-bug.md)** - Infrastructure backlog (updated with Phase 1 & 2 completion)
+- **[docs/integration-plan.md](integration-plan.md)** - GCP → Redis migration details
+- **[README.md](../README.md)** - Quick start guide
 
-Expected: Docker version 24.x.x, Compose v2.x.x
+### Application Code
+- **[app/api/main.py](../app/api/main.py)** - FastAPI REST API endpoints
+- **[app/api/job_queue.py](../app/api/job_queue.py)** - Redis Queue integration with rate limiting
+- **[app/worker/worker.py](../app/worker/worker.py)** - RQ Worker that calls optimizer
+- **[app/worker/optimizer/SolverRunner.py](../app/worker/optimizer/SolverRunner.py)** - Core optimization logic
+- **[app/tests/test_integration.py](../app/tests/test_integration.py)** - End-to-end integration tests
 
-### Step 2: Build Docker Images (5-10 minutes)
+### Infrastructure
+- **[hotel-optimizer-infra/docker-compose.yml](../hotel-optimizer-infra/docker-compose.yml)** - Service orchestration
+- **[hotel-optimizer-infra/nginx/nginx.conf](../hotel-optimizer-infra/nginx/nginx.conf)** - Nginx configuration with rate limiting
+- **[.github/workflows/ci.yml](../.github/workflows/ci.yml)** - CI/CD pipeline (all checks passing)
 
-```powershell
-cd c:\Users\benh6\OneDrive\Desktop\greeks\hotel-optimizer-infra
-docker compose build
-```
+### Test Data
+- **[app/tests/test_data/SampleInput_2 (1).json](../app/tests/test_data/SampleInput_2%20(1).json)** - 11 reservations, 5 rooms
+- **[booking-opt-prod/TestJSON/SampleInput_3.json](../booking-opt-prod/TestJSON/SampleInput_3.json)** - 27 reservations (used in testing)
+- **[booking-opt-prod/TestJSON/SampleInput_4.json](../booking-opt-prod/TestJSON/SampleInput_4.json)** - 53 reservations with adjacency groups
 
-**Watch for:**
-- ✅ API image builds successfully
-- ✅ Worker image builds (scipy compilation takes longest)
-- ❌ Errors related to scipy dependencies (gcc, gfortran, libopenblas)
-- ❌ Import errors in optimizer modules
+---
 
-**If Build Fails:**
-- Check `app/worker/Dockerfile` - ensure build dependencies installed
-- Check `app/worker/requirements.txt` - scipy version compatibility
-- Check `app/worker/optimizer/` - all modules copied correctly
-- Verify import paths in `worker.py` (line 13: `from optimizer import SolverRunner`)
+## 🧪 Quick Verification Commands
 
-### Step 3: Start Services
+### Verify Current Local State
 
 ```powershell
-docker compose up -d
-```
+# Navigate to project
+cd c:\Users\benh6\OneDrive\Desktop\greeks
 
-**Verify all 4 containers running:**
-```powershell
+# Check Docker services
+cd hotel-optimizer-infra
 docker compose ps
-```
 
-Expected output:
-```
-NAME                    STATUS
-nginx                   Up (healthy)
-api                     Up (healthy)
-worker                  Up
-redis                   Up (healthy)
-```
+# Should show all services running:
+# NAME                    STATUS
+# nginx                   Up (healthy)
+# api                     Up (healthy)
+# worker                  Up
+# redis                   Up (healthy)
 
-### Step 4: Test Health Endpoint
-
-```powershell
+# Test health endpoint
 curl http://localhost/health
+
+# Expected: {"status":"healthy","version":"1.0.0","timestamp":"..."}
 ```
 
-Expected:
-```json
-{"status":"healthy","version":"1.0.0","timestamp":"..."}
-```
-
-### Step 5: Submit Test Optimization Job
+### Submit Test Job (Verify End-to-End)
 
 ```powershell
 # Load test data
-$testData = Get-Content "c:\Users\benh6\OneDrive\Desktop\greeks\app\tests\test_data\SampleInput_2 (1).json" -Raw
+$testData = Get-Content "c:\Users\benh6\OneDrive\Desktop\greeks\booking-opt-prod\TestJSON\SampleInput_3.json" -Raw
 
 # Submit job
 $response = Invoke-RestMethod -Method Post `
   -Uri "http://localhost/api/v1/optimize" `
-  -Headers @{"Content-Type"="application/json"; "X-User-ID"="test-session"} `
+  -Headers @{"Content-Type"="application/json"; "X-User-ID"="test-user"} `
   -Body $testData
 
-# Extract job ID
+# Get job ID and poll for results
 $jobId = $response.job_id
 Write-Host "Job ID: $jobId"
-Write-Host "Status: $($response.status)"
-Write-Host "Problem ID: $($response.problem_id)"
+
+# Check status
+Invoke-RestMethod -Uri "http://localhost/api/v1/jobs/$jobId" | ConvertTo-Json -Depth 5
+
+# Should show: "status": "completed", "result.success": true
 ```
 
-### Step 6: Poll for Results
-
-```powershell
-# Poll every 2 seconds
-for ($i = 0; $i -lt 60; $i++) {
-    $status = Invoke-RestMethod -Uri "http://localhost/api/v1/jobs/$jobId"
-    Write-Host "[$i] Status: $($status.status)"
-
-    if ($status.status -eq "completed") {
-        Write-Host "SUCCESS! Result:"
-        $status | ConvertTo-Json -Depth 10
-        break
-    }
-    elseif ($status.status -eq "failed") {
-        Write-Host "FAILED! Error:"
-        $status.error
-        break
-    }
-
-    Start-Sleep -Seconds 2
-}
-```
-
-### Step 7: Examine Results
-
-**Critical Validation Points:**
-1. ✅ Job completes (not stuck in "queued" or "running")
-2. ✅ `status.result.success` is `true`
-3. ✅ `status.result.result` contains optimization output
-4. ✅ Room assignments are valid (all reservations assigned)
-5. ✅ No constraint violations
-
-**If Job Fails:**
-```powershell
-# Check worker logs
-docker compose logs worker
-
-# Check API logs
-docker compose logs api
-
-# Check Redis queue
-docker compose exec redis redis-cli LLEN optimization
-docker compose exec redis redis-cli LRANGE optimization 0 -1
-```
-
-## 🔍 What to Validate
-
-### 1. Optimizer Functionality
-
-**Expected Result Structure:**
-```json
-{
-  "success": true,
-  "result": {
-    "ProblemId": "2222",
-    "assignments": [...],
-    "objective_value": ...,
-    "solver_status": "optimal"
-  },
-  "problem_id": "2222"
-}
-```
-
-**Validation Checklist:**
-- [ ] All reservations from input are assigned
-- [ ] Room assignments respect constraints (MinimumStay, etc.)
-- [ ] No double-bookings (same room, overlapping dates)
-- [ ] Adjacency groups handled correctly
-- [ ] Solver reports "optimal" or "feasible" status
-
-### 2. Visualization (Future)
-
-**Note**: Plotter function was deferred (see `docs/integration-plan.md`)
-- Original GCP had `optimize-plotter-function` for PNG generation
-- Currently: Return JSON results only
-- Future: Integrate plotter into worker (optional output)
-
-**If you need to add plotter:**
-- Copy `booking-opt-prod/optimize-plotter-function/` modules
-- Integrate into `app/worker/worker.py` after optimization
-- Generate PNG, encode as base64, include in result
-
-### 3. Rate Limiting
-
-**Test nginx rate limiting (12 req/min):**
-```powershell
-# Submit 15 rapid requests
-for ($i = 0; $i -lt 15; $i++) {
-    try {
-        Invoke-RestMethod -Method Post -Uri "http://localhost/api/v1/optimize" `
-          -Headers @{"Content-Type"="application/json"; "X-User-ID"="rate-test-$i"} `
-          -Body $testData
-        Write-Host "Request $i: Success"
-    }
-    catch {
-        Write-Host "Request $i: RATE LIMITED (429)"
-    }
-}
-```
-
-Expected: Some requests return 429 Too Many Requests
-
-**Test application rate limiting (3 concurrent jobs/user):**
-```powershell
-# Submit 4 jobs with same user ID
-# 4th should be rate limited
-```
-
-## 🧪 Testing Workflows
-
-### Unit Tests (No Docker Required)
+### Check CI/CD Status
 
 ```bash
-cd c:\Users\benh6\OneDrive\Desktop\greeks
-pip install -r app/tests/requirements.txt
-pytest app/tests/test_api.py -v
+# Using GitHub CLI (if installed)
+gh run list --limit 5
+
+# Or visit: https://github.com/nullogism/booking-opt-claude/actions
+# Latest run should show all checks passing
 ```
-
-### Integration Tests (Requires Docker Running)
-
-```bash
-pytest app/tests/test_integration.py -v -m integration
-```
-
-### Quick Smoke Test
-
-```bash
-bash scripts/quick-test.sh
-```
-
-## 🏗️ CI/CD Next Steps
-
-Once local testing passes:
-
-### 1. Verify GitHub Actions Pipeline
-
-- Push any changes: `git push origin main`
-- Check Actions tab: https://github.com/nullogism/booking-opt-claude/actions
-- Pipeline should run: Lint → Unit Test → Build → Integration Test → Security
-
-### 2. Create Deployment Workflow
-
-**File**: `.github/workflows/deploy.yml`
-
-**Stages:**
-1. Build and tag images with version
-2. Push to container registry (GHCR or Docker Hub)
-3. SSH to target VM
-4. Pull images and restart services
-5. Run smoke tests
-6. Rollback on failure
-
-### 3. Target VM Setup
-
-**Requirements:**
-- Debian 11+ VM in European datacenter
-- Docker + Docker Compose installed
-- SSH access configured
-- Domain name (for SSL)
-
-**Deployment command:**
-```bash
-# On VM
-cd /opt/booking-opt-claude
-git pull origin main
-cd hotel-optimizer-infra
-docker compose pull
-docker compose up -d
-```
-
-## 🐛 Known Issues / Watch For
-
-### Issue 1: Scipy Import Errors
-**Symptom**: Worker fails with `ImportError: libopenblas.so.0`
-**Fix**: Check `app/worker/Dockerfile` build dependencies (lines 9-14)
-
-### Issue 2: SolverRunner Import Path
-**Symptom**: `ModuleNotFoundError: No module named 'optimizer'`
-**Fix**: Check `app/worker/worker.py` line 13 and PYTHONPATH
-
-### Issue 3: Job Hangs in "queued"
-**Symptom**: Job never gets picked up by worker
-**Causes:**
-- Worker not running: `docker compose logs worker`
-- Redis connection issue: `docker compose logs redis`
-- Worker crashed: Check for exceptions in logs
-
-### Issue 4: Optimization Fails (success=false)
-**Symptom**: Job completes but `result.success` is `false`
-**Causes:**
-- Infeasible problem (constraints too strict)
-- Scipy solver error (check `result.details`)
-- Input validation failed in SolverRunner
-
-## 📚 Key Documentation
-
-- **[README.md](../README.md)** - Quick start guide
-- **[TESTING.md](../TESTING.md)** - Complete testing documentation
-- **[docs/integration-plan.md](integration-plan.md)** - GCP → Redis migration details
-- **[docs/app-feature-bug.md](app-feature-bug.md)** - Application task tracking
-- **[docs/infra-feature-bug.md](infra-feature-bug.md)** - Infrastructure task tracking
-
-## 💬 User Context
-
-**User**: Ben Hartman (benh6@nullogism.com)
-**Company**: nullogism
-**Project**: Hotel room booking optimization
-**Traffic**: 1-2 operators, low volume
-**Budget**: $25-50/month
-**Target**: European datacenter deployment
-**GDPR**: EU data residency required
-
-**Original System (GCP):**
-- Cloud Storage + Pub/Sub + Cloud Functions
-- Worked but expensive for low traffic
-- Custom scippy base image
-
-**New System (This Project):**
-- Redis Queue instead of Pub/Sub
-- Redis storage instead of GCS
-- Standard scipy from PyPI
-- Portable (runs anywhere with Docker)
-
-## ✅ Success Criteria
-
-Before considering testing complete:
-
-1. [ ] Docker images build without errors
-2. [ ] All 4 services start and report healthy
-3. [ ] API `/health` endpoint responds
-4. [ ] Can submit optimization job
-5. [ ] Worker picks up and processes job
-6. [ ] Job completes with `success: true`
-7. [ ] Results contain valid room assignments
-8. [ ] Rate limiting works (nginx + application)
-9. [ ] Integration tests pass
-10. [ ] CI/CD pipeline passes on GitHub
-
-## 🚦 Next Session Start Commands
-
-```powershell
-# 1. Open project
-cd c:\Users\benh6\OneDrive\Desktop\greeks
-
-# 2. Check Docker
-docker --version
-
-# 3. Build images
-cd hotel-optimizer-infra
-docker compose build
-
-# 4. Start services
-docker compose up -d
-
-# 5. Test health
-curl http://localhost/health
-
-# 6. Submit test job (see Step 5 above for full command)
-```
-
-## 📝 Notes for Next Claude Instance
-
-- User has Windows with WSL2 and Docker Desktop
-- Repository: https://github.com/nullogism/booking-opt-claude.git
-- All code is committed and pushed
-- Testing infrastructure is complete but untested
-- Primary blocker was Docker Desktop installation (user restarting)
-- Focus on **validation of optimizer outputs** - this is critical
-- Plotter function deferred to Phase 2 (docs/app-feature-bug.md)
-- User wants to practice VM deployment after local testing
-
-**Last User Message**: "test docker builds locally and test the workflows to confirm that viable outputs are being served by the optimizer function and we're getting valid hotel booking arrangement plots. Then, we should thoughtfully construct our CI/CD in GitHub Actions, so that we can practice deploying this whole application to a virtual machine in any datacenter."
 
 ---
 
-**When User Returns**: Start with Step 1 (Verify Docker Desktop) and proceed through testing steps sequentially.
+## 🔧 Technical Debt & Backlog
+
+### Non-Blocking Issues (Can Address Separately)
+
+1. **Black Code Formatting** (P3 - Low Priority)
+   - 5 files need formatting: main.py, job_queue.py, worker.py, test_api.py, test_integration.py
+   - Currently non-blocking (continue-on-error in CI)
+   - Estimated effort: 15 minutes
+   - Tracked in: [docs/infra-feature-bug.md](infra-feature-bug.md) Line 403
+
+2. **Authentication** (P1 - Before Production)
+   - Currently using X-User-ID header (insecure)
+   - Need to implement JWT or API key auth
+   - Tracked in: [docs/TESTING-CHECKLIST.md](TESTING-CHECKLIST.md) Test 16
+
+3. **Monitoring & Alerting** (P2 - Post-Launch)
+   - No real-time metrics yet
+   - Consider: Prometheus + Grafana or lightweight alternative
+   - Tracked in: [docs/infra-feature-bug.md](infra-feature-bug.md) Phase 4
+
+---
+
+## 🐛 Known Issues / Watch For
+
+### Issue 1: Services Not Starting
+**Symptom**: One or more containers fail to start
+**Debug:**
+```powershell
+docker compose logs <service-name>
+docker compose ps
+```
+
+### Issue 2: Worker Not Processing Jobs
+**Symptom**: Jobs stuck in "queued" status
+**Debug:**
+```powershell
+docker compose logs worker
+docker compose exec redis redis-cli LLEN optimization
+```
+
+### Issue 3: Optimization Returns success=false
+**Symptom**: Job completes but result.success is false
+**Common Causes:**
+- Infeasible problem (constraints too strict)
+- Missing room data in input
+- Solver timeout
+
+**Debug:**
+- Check result.error for details
+- Review input data constraints
+- Check worker logs for exceptions
+
+---
+
+## 💡 Context for Claude Code
+
+### User Information
+- **Name**: Ben Hartman
+- **Company**: nullogism
+- **Email**: benh6@nullogism.com
+- **GitHub**: https://github.com/nullogism/booking-opt-claude
+
+### Project Background
+**Original System (GCP - Expensive):**
+- Cloud Storage + Pub/Sub + Cloud Functions
+- Custom scipy Docker image on Cloud Build
+- Worked well but ~$100-200/month for minimal traffic
+
+**New System (This Project - Cost-Effective):**
+- Redis Queue instead of Pub/Sub
+- Self-hosted on VM instead of Cloud Functions
+- Standard scipy from PyPI
+- Docker Compose for portability
+- Target: $25-50/month
+
+### Requirements
+- **Traffic**: 1-2 operators, low volume (< 100 jobs/day)
+- **GDPR**: EU data residency required
+- **Target**: European datacenter deployment
+- **Performance**: Jobs should complete in < 60 seconds
+- **Reliability**: 99% uptime acceptable for internal tool
+
+### Migration Status
+✅ **Complete**: Redis Queue integration, worker setup, testing infrastructure, CI/CD
+⏳ **Pending**: GCP VM deployment, European datacenter deployment, production hardening
+
+---
+
+## 🚀 When You Resume: Quick Start
+
+```powershell
+# 1. Read key documentation files
+# - docs/Production-readiness-v1.md (current state and roadmap)
+# - docs/TESTING-CHECKLIST.md (what's been tested)
+# - docs/infra-feature-bug.md (backlog)
+
+# 2. Verify local services are running
+cd c:\Users\benh6\OneDrive\Desktop\greeks\hotel-optimizer-infra
+docker compose ps
+
+# 3. If services not running, start them
+docker compose up -d
+
+# 4. Verify health
+curl http://localhost/health
+
+# 5. Check CI/CD status
+# Visit: https://github.com/nullogism/booking-opt-claude/actions
+
+# 6. Begin Phase 3: GCP VM Deployment
+# See "Phase 3 Plan" section above
+```
+
+---
+
+## 📝 Success Criteria for Phase 3
+
+Before moving to Phase 4 (European Datacenter):
+
+- [ ] GCP VM created in europe-west1 region
+- [ ] Docker installed on VM
+- [ ] Application deployed to VM successfully
+- [ ] All services running on VM
+- [ ] Health endpoint accessible via external IP
+- [ ] Optimization jobs processing correctly on VM
+- [ ] Automated deployment workflow created
+- [ ] Deployment tested and validated
+- [ ] Documentation updated with deployment process
+- [ ] Lessons learned documented
+
+---
+
+## 🎓 Lessons Learned (Phase 1 & 2)
+
+### Phase 1 Insights
+1. **Docker Compose Mounts**: Always verify volume mounts exist before starting services
+2. **RQ Compatibility**: RQ 2.x removed the Connection context manager - use Worker directly
+3. **Import Paths**: Optimizer modules needed relative imports (`.`) for proper package structure
+4. **Pydantic Models**: Missing fields get stripped during validation - ensure all required fields defined
+5. **Testing Workflow**: Manual Postman testing caught issues that unit tests missed
+
+### Phase 2 Insights
+1. **GitHub Actions Permissions**: Security scans need explicit `security-events: write` permission
+2. **Type Hints**: Modern Python (3.10+) prefers `X | None` over `Optional[X]` and `dict` over `Dict`
+3. **Legacy Code**: Exclude working legacy code from linting rather than reformatting
+4. **Test Isolation**: Unit tests should never require external services (Redis, databases)
+5. **CI Pragmatism**: Making non-critical checks non-blocking (black, mypy) speeds up iteration
+
+### Key Takeaway
+Incremental validation is critical. Testing locally first (Phase 1) caught major issues before CI/CD (Phase 2), saving significant debugging time.
+
+---
+
+**Last User Message**: "Let's update our internal docs with it, so we know where we are. Let's make sure we add the black formatting fixes to our infra backlog. I will take a break now, but when I come back, we can target the CD to a VM in GCP."
+
+**Next Session Focus**: Phase 3 - Deploy to GCP VM in europe-west1 region, test deployment process, create automated deployment workflow.
+
+---
+
+**End of Restart Instructions**
