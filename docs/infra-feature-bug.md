@@ -1,6 +1,7 @@
 # Infrastructure Features & Bugs
 
-**Last Updated**: 2026-01-31
+**Last Updated**: 2026-01-31 (Evening Session)
+**Status**: Ready for Docker Build Testing
 
 Track infrastructure, deployment, CI/CD, and operations tasks.
 
@@ -26,37 +27,39 @@ Track infrastructure, deployment, CI/CD, and operations tasks.
 ### P0 - Critical Path Items
 
 #### Docker Configuration
-- [ ] **Update docker-compose.yml with actual image name** (P0)
-  - Replace `your-optimizer-image:latest` on lines 42, 74
-  - Update with actual registry path (e.g., ghcr.io/username/optimizer:latest)
-  - **Blockers**: Need image name from GitHub Container Registry
-  - **Assignee**: TBD
+- [x] **Update docker-compose.yml with build contexts** (P0) - COMPLETED
+  - ✅ Replaced placeholder images with build directives
+  - ✅ API: build from ../app/api (bookingopt-api:latest)
+  - ✅ Worker: build from ../app/worker (bookingopt-worker:latest)
+  - ✅ Environment variables configured
+  - **Completed**: 2026-01-31
 
-- [ ] **Create .env file from template** (P0)
-  - Copy .env.example to .env
-  - Configure OPTIMIZER_IMAGE
-  - Set job duration and rate limits
-  - **Assignee**: TBD
+- [x] **Create .env.example template** (P0) - COMPLETED
+  - ✅ Template exists with all configuration options
+  - ⏳ User will create .env from template when needed
+  - **Completed**: 2026-01-31
 
-- [ ] **Test local Docker Compose deployment** (P0)
-  - `docker-compose up -d`
-  - Verify all services healthy
-  - Test API endpoints (health, optimize, jobs)
-  - Check logs for errors
-  - **Assignee**: TBD
-  - **Estimated Effort**: 1-2 hours
+- [ ] **Test local Docker Compose deployment** (P0) - PENDING DOCKER INSTALL
+  - ⏳ Docker Desktop installing (user restarting)
+  - ⏳ `docker compose build` not yet run
+  - ⏳ Verify all services healthy
+  - ⏳ Test API endpoints (health, optimize, jobs)
+  - **Next**: After Docker Desktop restart
+  - **See**: docs/RESTART-INSTRUCTIONS.md
 
 #### Nginx Configuration
-- [ ] **Review and adjust rate limits** (P1)
-  - Optimize endpoint: currently 12 req/min
-  - General API: currently 10 req/sec
-  - Adjust based on actual usage patterns
-  - **Assignee**: TBD
+- [x] **Rate limits configured** (P1) - COMPLETED
+  - ✅ Optimize endpoint: 12 req/min (burst 3)
+  - ✅ General API: 10 req/sec (burst 20)
+  - ✅ Job polling: 10 req/sec (burst 50)
+  - ⏳ Will adjust based on actual usage patterns after testing
+  - **Completed**: 2026-01-31
 
-- [ ] **Create SSL certificate directory** (P1)
-  - mkdir -p hotel-optimizer-infra/nginx/ssl
-  - Add to .gitignore
-  - **Assignee**: TBD
+- [x] **SSL certificate directory created** (P1) - COMPLETED
+  - ✅ hotel-optimizer-infra/nginx/ssl/ created
+  - ✅ .gitkeep added
+  - ✅ Already in .gitignore
+  - **Completed**: 2026-01-31
 
 ### P1 - Required for Production
 
@@ -97,27 +100,26 @@ Track infrastructure, deployment, CI/CD, and operations tasks.
 ### P0 - Critical for Automation
 
 #### GitHub Actions - Build Pipeline
-- [ ] **Create .github/workflows/ci.yml** (P0)
-  - Trigger on push to main, pull requests
-  - Checkout code
-  - Run test suite (pytest)
-  - Lint code (ruff, black)
-  - Build Docker image
-  - Push to container registry
-  - **Assignee**: TBD
-  - **Estimated Effort**: 4-6 hours
+- [x] **Create .github/workflows/ci.yml** (P0) - COMPLETED
+  - ✅ Triggers on push to main, pull requests
+  - ✅ Lint & Type Check stage (ruff, black, mypy)
+  - ✅ Unit Tests stage (pytest)
+  - ✅ Docker Build stage (buildx with caching)
+  - ✅ Integration Tests stage (docker compose)
+  - ✅ Security Scan stage (Trivy, Safety)
+  - **Completed**: 2026-01-31
+  - **Next**: Will run automatically on next push
 
-- [ ] **Set up GitHub Container Registry (GHCR)** (P0)
-  - Create GITHUB_TOKEN secret
-  - Configure package permissions
-  - Test manual push to ghcr.io
-  - **Assignee**: TBD
+- [ ] **Set up GitHub Container Registry (GHCR)** (P1) - DEFERRED
+  - ⏳ Currently building locally
+  - ⏳ Will configure when ready for registry push
+  - **Status**: Not needed until deployment phase
 
-- [ ] **Docker image tagging strategy** (P0)
-  - Tag: `latest` (main branch)
-  - Tag: `main-<git-sha>` (specific commits)
-  - Tag: `v<version>` (releases)
-  - **Assignee**: TBD
+- [x] **Docker image tagging strategy** (P0) - DEFINED
+  - ✅ Tag: `bookingopt-api:latest` / `bookingopt-worker:latest` (local)
+  - ✅ Tag: `bookingopt-api:<git-sha>` (CI builds)
+  - ⏳ Tag: `v<version>` (future releases)
+  - **Completed**: 2026-01-31 (strategy defined)
 
 #### GitHub Actions - Deployment Pipeline
 - [ ] **Create .github/workflows/deploy.yml** (P1)
@@ -137,16 +139,19 @@ Track infrastructure, deployment, CI/CD, and operations tasks.
   - **Assignee**: TBD
 
 #### Automated Testing in CI
-- [ ] **Add test stage to CI pipeline** (P1)
-  - Run pytest with coverage
-  - Integration tests with docker-compose
-  - Fail build on test failures
-  - **Assignee**: TBD
+- [x] **Add test stages to CI pipeline** (P1) - COMPLETED
+  - ✅ Unit test stage with pytest
+  - ✅ Integration test stage with docker compose
+  - ✅ Build fails on test failures
+  - ✅ Coverage reporting configured (optional)
+  - **Completed**: 2026-01-31
 
-- [ ] **Add security scanning** (P2)
-  - Trivy or Snyk for Docker image scanning
-  - Fail on critical vulnerabilities
-  - **Assignee**: TBD
+- [x] **Add security scanning** (P2) - COMPLETED
+  - ✅ Trivy vulnerability scanner (filesystem + images)
+  - ✅ Safety dependency checker
+  - ✅ SARIF upload to GitHub Security
+  - ✅ Configured to continue on non-critical issues
+  - **Completed**: 2026-01-31
 
 ---
 
