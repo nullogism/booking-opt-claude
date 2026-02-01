@@ -48,6 +48,7 @@ exclude = [
     "build",
     "dist",
     "booking-opt-prod",
+    "app/worker/optimizer",  # Legacy optimizer code with different style
 ]
 
 [tool.ruff.per-file-ignores]
