@@ -1,0 +1,177 @@
+name: Deploy to GCP VM
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  GCP_PROJECT: booking-opt-docker-compose
+  GCP_ZONE: us-central1-a
+  VM_NAME: bookingopt-staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Check and install Docker on VM
+        run: |
+          echo "Checking for Docker on VM..."
+
+          # Function to check if Docker is installed
+          CHECK_DOCKER=$(gcloud compute ssh $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --command="which docker" || echo "not_found")
+
+          if [[ "$CHECK_DOCKER" == "not_found" ]] || [[ -z "$CHECK_DOCKER" ]]; then
+            echo "Docker not found. Installing Docker and Docker Compose..."
+
+            gcloud compute ssh $VM_NAME \
+              --project=$GCP_PROJECT \
+              --zone=$GCP_ZONE \
+              --command="
+                set -e
+                sudo apt-get update
+                sudo apt-get install -y ca-certificates curl
+                sudo install -m 0755 -d /etc/apt/keyrings
+                sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+                sudo chmod a+r /etc/apt/keyrings/docker.asc
+                echo \"deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \$(. /etc/os-release && echo \\\"\\\$VERSION_CODENAME\\\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+                sudo apt-get update
+                sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+                sudo usermod -aG docker \$USER
+              "
+
+            echo "Docker installed successfully"
+          else
+            echo "Docker is already installed: $CHECK_DOCKER"
+          fi
+
+          # Verify installation
+          gcloud compute ssh $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --command="docker --version && docker compose version"
+
+      - name: Check and install Git on VM
+        run: |
+          echo "Checking for Git on VM..."
+
+          CHECK_GIT=$(gcloud compute ssh $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --command="which git" || echo "not_found")
+
+          if [[ "$CHECK_GIT" == "not_found" ]] || [[ -z "$CHECK_GIT" ]]; then
+            echo "Git not found. Installing Git..."
+
+            gcloud compute ssh $VM_NAME \
+              --project=$GCP_PROJECT \
+              --zone=$GCP_ZONE \
+              --command="sudo apt-get update && sudo apt-get install -y git"
+
+            echo "Git installed successfully"
+          else
+            echo "Git is already installed: $CHECK_GIT"
+          fi
+
+      - name: Deploy application to VM
+        run: |
+          echo "Deploying BookingOpt to VM..."
+
+          gcloud compute ssh $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --command="
+              set -e
+
+              # Create app directory if it doesn't exist
+              mkdir -p ~/booking-opt
+              cd ~/booking-opt
+
+              # Clone or update repository
+              if [ -d '.git' ]; then
+                echo 'Repository exists, pulling latest changes...'
+                git fetch origin
+                git reset --hard origin/main
+                git pull origin main
+              else
+                echo 'Cloning repository...'
+                git clone https://github.com/nullogism/booking-opt-claude.git .
+              fi
+
+              # Stop existing containers
+              docker compose down || true
+
+              # Build and start containers
+              docker compose up -d --build
+
+              # Wait for services to be ready
+              echo 'Waiting for services to start...'
+              sleep 10
+
+              # Check container status
+              docker compose ps
+            "
+
+      - name: Health check
+        run: |
+          echo "Running health checks..."
+
+          # Get VM external IP
+          VM_IP=$(gcloud compute instances describe $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+
+          echo "VM IP: $VM_IP"
+
+          # Wait for application to be ready
+          for i in {1..30}; do
+            if curl -f "http://$VM_IP/health" > /dev/null 2>&1; then
+              echo "Health check passed!"
+              curl "http://$VM_IP/health"
+              exit 0
+            fi
+            echo "Waiting for application to be ready... ($i/30)"
+            sleep 2
+          done
+
+          echo "Health check failed after 60 seconds"
+          exit 1
+
+      - name: Display deployment info
+        if: success()
+        run: |
+          VM_IP=$(gcloud compute instances describe $VM_NAME \
+            --project=$GCP_PROJECT \
+            --zone=$GCP_ZONE \
+            --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+
+          echo "========================================="
+          echo "Deployment successful!"
+          echo "========================================="
+          echo "API URL: http://$VM_IP"
+          echo "Health endpoint: http://$VM_IP/health"
+          echo "Optimization endpoint: http://$VM_IP/api/v1/optimize"
+          echo "========================================="
