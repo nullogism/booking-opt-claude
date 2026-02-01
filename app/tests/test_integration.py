@@ -87,7 +87,7 @@ class TestEndToEndWorkflow:
         job_ids = []
         rate_limited = False
 
-        for i in range(4):
+        for _ in range(4):
             response = requests.post(
                 f"{BASE_URL}/api/v1/optimize",
                 json=test_data,

@@ -8,11 +8,9 @@ import os
 from datetime import datetime
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Header, Request
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
-
 from job_queue import (
     JobResult,
     JobStatus,
@@ -20,6 +18,7 @@ from job_queue import (
     enqueue_optimization,
     get_job_status,
 )
+from pydantic import BaseModel, Field
 
 # Logging setup
 logging.basicConfig(
