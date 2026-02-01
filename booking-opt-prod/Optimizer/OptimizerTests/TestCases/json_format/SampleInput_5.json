@@ -1,0 +1,128 @@
+{
+    "ProblemId": "5555",
+    "MinimumStay": 5.0,
+    "NewReservations": [],
+    "MinimumStayByDay": {},
+    "Reservations": [
+        {
+            "Name": "1",
+            "Arrival": "2021-06-23",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "2",
+            "Arrival": "2021-06-27",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "3",
+            "Arrival": "2021-06-23",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "3",
+            "IsLocked": true
+        },
+        {
+            "Name": "4",
+            "Arrival": "2021-06-30",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "5",
+            "Arrival": "2021-07-04",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "7",
+            "Arrival": "2021-07-07",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "8",
+            "Arrival": "2021-07-12",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "9",
+            "Arrival": "2021-07-17",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "10",
+            "Arrival": "2021-07-19",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "1",
+            "IsLocked": true
+        },
+        {
+            "Name": "6",
+            "Arrival": "2021-07-19",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "2",
+            "IsLocked": true
+        },
+        {
+            "Name": "11",
+            "Arrival": "2021-07-22",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "12",
+            "Arrival": "2021-08-01",
+            "Length": 13.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "3",
+            "IsLocked": true
+        },
+        {
+            "Name": "13",
+            "Arrival": "2021-08-02",
+            "Length": 14.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "14",
+            "Arrival": "2021-08-09",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "2",
+            "IsLocked": true
+        }
+    ],
+    "Rooms": [
+        {
+            "RoomNumber": "1",
+            "RoomType": null,
+            "AdjacentRooms": []
+        },
+        {
+            "RoomNumber": "2",
+            "RoomType": null,
+            "AdjacentRooms": []
+        },
+        {
+            "RoomNumber": "3",
+            "RoomType": null,
+            "AdjacentRooms": []
+        }
+    ]
+}

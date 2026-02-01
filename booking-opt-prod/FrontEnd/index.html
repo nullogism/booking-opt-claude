@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BookingOpt File Uploader</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Allows switching API host between dev/prod without changing code -->
+  <script>
+    window.API_BASE_URL = ""; // e.g. "https://bookingopt.example.com"
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>BookingOpt File Uploader</h1>
+
+    <!-- Upload Form -->
+    <form id="uploadForm">
+      <input
+        type="file"
+        id="jsonFile"
+        accept=".json"
+        required
+        multiple
+      />
+      <p class="file-upload-note">You can select up to 10 .json files at a time.</p>
+      <button type="submit">Upload JSON</button>
+      <span id="uploadSpinner" class="hidden">⏳</span>
+    </form>
+    <div id="uploadError"></div>
+    <div id="uploadResult"></div>
+
+    <hr />
+
+    <!-- Echo Debug Form -->
+    <h2>API Echo Test</h2>
+    <form id="echoForm">
+      <textarea
+        id="echoInput"
+        rows="4"
+        cols="40"
+        placeholder='{"foo":"bar"}'
+      ></textarea><br/>
+      <button type="submit">Send to /api/echo</button>
+    </form>
+    <div id="echoError"></div>
+    <pre id="echoResult"></pre>
+  </div>
+
+  <script src="js/upload.js"></script>
+</body>
+</html>

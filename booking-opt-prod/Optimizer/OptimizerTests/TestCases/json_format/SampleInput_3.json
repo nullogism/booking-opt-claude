@@ -1,0 +1,237 @@
+{
+    "ProblemId": "3333",
+    "MinimumStay": 5.0,
+    "NewReservations": [],
+    "MinimumStayByDay": {},
+    "Reservations": [
+        {
+            "Name": "1",
+            "Arrival": "2021-03-01",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "2",
+            "Arrival": "2021-03-01",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "3",
+            "Arrival": "2021-03-05",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "4",
+            "Arrival": "2021-03-01",
+            "Length": 9.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "4",
+            "IsLocked": true
+        },
+        {
+            "Name": "5",
+            "Arrival": "2021-03-01",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "6",
+            "Arrival": "2021-03-06",
+            "Length": 16.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "1",
+            "IsLocked": true
+        },
+        {
+            "Name": "7",
+            "Arrival": "2021-03-10",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "8",
+            "Arrival": "2021-03-10",
+            "Length": 7.0,
+            "AdjacencyGroup": "1.0",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "9",
+            "Arrival": "2021-03-10",
+            "Length": 7.0,
+            "AdjacencyGroup": "1.0",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "10",
+            "Arrival": "2021-03-12",
+            "Length": 2.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "11",
+            "Arrival": "2021-03-14",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "12",
+            "Arrival": "2021-03-17",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "13",
+            "Arrival": "2021-03-21",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "14",
+            "Arrival": "2021-03-22",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "15",
+            "Arrival": "2021-03-25",
+            "Length": 4.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "16",
+            "Arrival": "2021-03-26",
+            "Length": 4.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "1",
+            "IsLocked": true
+        },
+        {
+            "Name": "17",
+            "Arrival": "2021-03-28",
+            "Length": 10.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "18",
+            "Arrival": "2021-03-29",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "19",
+            "Arrival": "2021-03-29",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "20",
+            "Arrival": "2021-03-31",
+            "Length": 11.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "21",
+            "Arrival": "2021-04-05",
+            "Length": 9.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "22",
+            "Arrival": "2021-04-06",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "23",
+            "Arrival": "2021-04-07",
+            "Length": 9.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "24",
+            "Arrival": "2021-04-09",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "4",
+            "IsLocked": true
+        },
+        {
+            "Name": "25",
+            "Arrival": "2021-04-11",
+            "Length": 5.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "2",
+            "IsLocked": true
+        },
+        {
+            "Name": "26",
+            "Arrival": "2021-04-12",
+            "Length": 4.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "27",
+            "Arrival": "2021-04-14",
+            "Length": 2.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        }
+    ],
+    "Rooms": [
+        {
+            "RoomNumber": "1",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "2"
+            ]
+        },
+        {
+            "RoomNumber": "2",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "1"
+            ]
+        },
+        {
+            "RoomNumber": "3",
+            "RoomType": null,
+            "AdjacentRooms": []
+        },
+        {
+            "RoomNumber": "4",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "5"
+            ]
+        },
+        {
+            "RoomNumber": "5",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "4"
+            ]
+        }
+    ]
+}

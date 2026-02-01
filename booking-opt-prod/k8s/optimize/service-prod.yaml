@@ -1,0 +1,16 @@
+# optimize-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking-opt-optimize
+  namespace: prod
+  labels:
+    app: booking-opt-optimize
+spec:
+  type: ClusterIP
+  selector:
+    app: booking-opt-optimize
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http

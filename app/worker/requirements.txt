@@ -1,0 +1,10 @@
+# Core dependencies
+redis>=5.0.0
+rq>=1.15.0
+
+# Scientific computing (for optimizer)
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Additional optimizer dependencies (if needed)
+# Add any other dependencies required by the optimizer modules

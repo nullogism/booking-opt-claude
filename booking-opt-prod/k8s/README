@@ -1,0 +1,391 @@
+# BookingOpt Kubernetes Deployment
+
+## 1. Overview
+
+This project hosts a static front-end GUI (nginx) and a FastAPI backend on Google Kubernetes Engine (GKE). Users can upload `.json` files via the GUI or call the backend API directly. Uploaded JSON is parsed, logged, and eventually processed into job outputs (e.g., images in GCS).
+
+## 2. Cluster Context
+
+* **Cluster:** `booking-opt-dev` in `nullogism` project
+* **Location:** `us-central1-a` (GKE Autopilot, Kubernetes v1.32.2)
+* **Networking:** VPC native with IP aliases
+* **Namespace:** `default` (recommend creating `booking-opt` for isolation)
+
+## 3. Resource Interaction Overview
+
+Before diving into individual Kubernetes objects, here’s how they fit together:
+
+* **Deployments** launch and manage your application Pods. Two Deployments exist:
+
+  1. **backend-api** runs FastAPI Pods on port 8000, parsing JSON and exposing `/api` endpoints.
+  2. **nginx-frontend** runs nginx Pods on port 80, serving static assets and reverse‑proxying `/api/` to the backend.
+
+* **Services** expose Pods to each other and (for the frontend) to the outside world:
+
+  * **backend-service** (ClusterIP) load‑balances traffic among `backend-api` Pods on port 80 → 8000.
+  * **frontend-service** (LoadBalancer) provides an external IP and forwards port 80 traffic to `nginx-frontend` Pods.
+
+* **ConfigMap** stores the custom `nginx.conf` mounted by the `nginx-frontend` Pods. It defines:
+
+  * A `location /` block for static files.
+  * A `location /api/` block that proxies to `backend-service`.
+
+* **Ingress** (GCE) sits in front of the LoadBalancer Service to handle:
+
+  * TLS termination with a Google‑managed certificate.
+  * HTTP → HTTPS redirection.
+  * Path‑based routing (`/api/` → backend, `/` → frontend).
+
+Together, these objects form a clear separation of concerns: the nginx Pods handle user‑facing traffic and static content, while the FastAPI Pods process JSON payloads behind an internal Service.
+
+## 4. Kubernetes Resources
+
+### 4.1. Deployments
+
+* **backend-api** (FastAPI)
+
+  * Image: `us-central1-docker.pkg.dev/nullogism/booking-opt-backend/backend:latest`
+  * Replicas: 2
+  * Container port: `8000`
+  * Health Probes: `/health` readiness (10s), liveness (20s)
+  * Resources: requests `250m/256Mi`, limits `500m/512Mi`
+
+* **nginx-frontend** (nginx + static)
+
+  * Image: `us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest`
+  * Replicas: 2
+  * Container port: `80`
+  * ConfigMap `nginx-config` mounts custom `nginx.conf` for static + reverse-proxy
+
+### 4.2. Services
+
+* **backend-service** (`ClusterIP`)
+
+  * Port `80` → targetPort `8000`
+* **frontend-service** (`LoadBalancer`)
+
+  * Port `80` → targetPort `80`
+
+### 4.3. ConfigMap
+
+* **nginx-config**
+
+  * Defines `server` block:
+
+    * `location / { root /usr/share/nginx/html; }`
+    * `location /api/ { proxy_pass http://backend-service:80/api/; }`
+
+### 4.4. Ingress (GCE)
+
+* Name: `bookingopt-ingress`
+* Annotations:
+
+  * `kubernetes.io/ingress.class: gce`
+  * `networking.gke.io/managed-certificates: bookingopt-cert`
+* Rules:
+
+  * `/api/` → `backend-service:80`
+  * `/` → `frontend-service:80`
+* TLS using Google-managed cert
+
+## 5. Developer Workflow & GCP Dependencies
+
+This section outlines how you (the front-end developer) build, publish, and deploy the UI and interact with GCP tooling.
+
+### 5.1. Artifact Registry
+
+* **Backend repository:** `us-central1-docker.pkg.dev/nullogism/booking-opt-backend`
+* **Frontend repository:** `us-central1-docker.pkg.dev/nullogism/booking-opt-frontend`
+* Ensure your service account (nodes) has `roles/artifactregistry.reader` to pull images.
+
+### 5.2. Docker build & push
+
+1. **Front-end:**
+
+   ```bash
+   cd frontend
+   docker build -t us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest .
+   docker push us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest
+   ```
+2. **Back-end:**
+
+   ```bash
+   cd backend
+   docker build -t us-central1-docker.pkg.dev/nullogism/booking-opt-backend/backend:latest .
+   docker push us-central1-docker.pkg.dev/nullogism/booking-opt-backend/backend:latest
+   ```
+
+### 5.3. GKE & kubectl context
+
+* Authenticate and select cluster:
+
+  ```bash
+  gcloud container clusters get-credentials booking-opt-dev \
+    --zone us-central1-a --project nullogism
+  ```
+* Use `kubectl rollout restart deployment/<name>` to apply new images.
+
+### 5.4. Other GCP Services
+
+* **Google‑managed TLS Certificate:** Create a `ManagedCertificate` CRD for your domain.
+* **Cloud DNS (future):** Point your custom domain A record to the LB IP.
+
+## 6. Integrating Custom Backend Logic
+
+Your backend engineer can replace the stub upload handler with real logic that:
+
+1. Parses the incoming JSON into `obj = json.loads(contents)`.
+2. Extracts the `ProblemId` field, or raises an HTTP 400 if missing:
+
+   ```python
+   pid = obj.get("ProblemId")
+   if not pid:
+       raise HTTPException(status_code=400, detail="Missing ProblemId")
+   ```
+3. Processes the payload (e.g., runs optimization, generates an image) and uploads the result to a GCS bucket. Acquire a public URL or signed URL:
+
+   ```python
+   from google.cloud import storage
+   def upload_to_gcs(local_path: str, bucket: str, destination: str) -> str:
+       client = storage.Client()
+       blob = client.bucket(bucket).blob(destination)
+       blob.upload_from_filename(local_path)
+       return blob.public_url  # or blob.generate_signed_url(...)
+   ```
+4. Returns a JSON response matching the front-end contract:
+
+   ```python
+   return {
+       "problemId": pid,
+       "resultUrl": gcs_url
+   }
+   ```
+
+Once these steps are implemented, simply build, push, and rollout restart your backend Deployment. The front-end will automatically detect `problemId` and `resultUrl` and display the computed link.
+
+## 7. Update Procedures
+
+1. **Front-end:**
+
+   ```bash
+   cd frontend/
+   docker build -t us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest .
+   docker push us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest
+   kubectl rollout restart deployment/nginx-frontend
+   ```
+2. **Back-end:**
+
+   ```bash
+   cd backend/
+   docker build -t us-central1-docker.pkg.dev/nullogism/booking-opt-backend/backend:latest .
+   docker push us-central1-docker.pkg.dev/nullogism/booking-opt-backend/backend:latest
+   kubectl rollout restart deployment/backend-api
+   ```
+3. **Ingress / Certificates:**
+
+   ```bash
+   kubectl apply -f managed-certificate.yaml
+   kubectl apply -f ingress.yaml
+   ```
+
+## 8. Testing
+
+Outlined below are the key test cases to validate end‑to‑end functionality.
+
+### 8.1. Health Check Validation
+
+* **Verify Pods & Services**:
+
+  ```bash
+  kubectl get pods,svc,ingress
+  ```
+
+  Ensure all `backend-api` and `nginx-frontend` pods are `Running` and `READY` with external endpoints assigned.
+
+### 8.2. Echo Endpoint
+
+1. **Send a JSON payload** via curl:
+
+   ```bash
+   curl -X POST http://<FRONTEND-URL>/api/echo \
+     -H "Content-Type: application/json" \
+     -d '{"foo":"bar"}'
+   ```
+2. **Expected response**:
+
+   ```json
+   {
+     "message":"Payload received",
+     "data":{"foo":"bar"}
+   }
+   ```
+3. **Confirm log entry**:
+
+   ```bash
+   kubectl logs deployment/backend-api -c fastapi --tail=5
+   ```
+
+   Should show a line: `Echo payload received: {'foo':'bar'}`
+
+### 8.3. File Upload Flow
+
+1. **Create a sample JSON**:
+
+   ```bash
+   echo '{"key1":1,"key2":2}' > test.json
+   ```
+2. **Upload via curl**:
+
+   ```bash
+   curl -X POST http://<FRONTEND-URL>/api/upload \
+     -F file=@test.json
+   ```
+3. **Expected response**:
+
+   ```json
+   {
+     "problemId":"1111",
+     "resultUrl":"https://storage.googleapis.com/bookingopt-results/1111.png"
+   }
+   ```
+4. **Check backend logs**:
+
+   ```bash
+   kubectl logs deployment/backend-api -c fastapi --tail=5
+   ```
+
+   Should show: `Stubbed upload: ProblemID=1111, resultUrl=https://storage.googleapis.com/bookingopt-results/1111.png`
+
+### 8.4. Client‑side Validation
+
+* **Invalid type**: Select a non‑JSON file → UI shows “Unsupported file type.”
+* **Oversized file**: Select a JSON >5 MB → UI shows “File too large.”
+* **Malformed JSON**: Upload syntactically invalid JSON → backend responds 400 with detail.
+
+### 8.5. Error Scenarios
+
+* **Network failure**: Throttle or disconnect in browser DevTools → user sees a friendly error message.
+* **Server error (5xx)**: Temporarily disable backend endpoint → UI shows “Upload failed (500).”
+
+## 9. API & Payload Flow
+
+```ascii
+[Browser]
+   |
+   | HTTP(S) POST /api/upload (FormData)
+   v
+[LoadBalancer / Ingress]
+   |
+   | forwards /api/upload → backend-service:80
+   v
+[nginx-frontend Pod]
+   | proxy_pass http://backend-service.default.svc.cluster.local:80/api/upload
+   v
+[backend-service] (ClusterIP)
+   |
+   v
+[backend-api Pod(s)]
+   - Receives raw multipart data
+   - Reads file into memory
+   - json.loads() parses object
+   - Extracts ProblemId
+   - Uploads result to GCS → URL
+   - Returns {problemId, resultUrl}
+```
+
+## 10. Architecture Diagram
+
+```ascii
+                    +---------------------------+
+                    |   GCP LoadBalancer/IP     |
+                    +-----------+---------------+
+                                |
+                   HTTP:80,HTTPS:443
+                                |
+             +----------+       v        +------------+
+             |  Ingress |--------------->| frontend    |
+             |  (GCE)   |  /api, / paths  | service     |
+             +----------+                +------------+
+                                |
+             path / → static       | path /api → proxy
+                                v
+                     +----------------------+        +----------------------+
+                     | nginx-frontend Pods  |<------>| backend-service     |
+                     | port 80              |        | (ClusterIP, port 80) |
+                     +----------------------+        +----------+-----------+
+                                                                |
+                                                                | targetPort:8000
+                                                                v
+                                                     +----------------------+
+                                                     | backend-api Pods     |
+                                                     | (FastAPI @8000)     |
+                                                     +----------------------+
+```
+
+**README maintained by:** Front‑end developer
+**Last updated:** May 2025
+
+K8s & WIF
+
+Instead of baking long‑lived JSON keys into our containers, we used GKE’s Workload Identity Federation to let our Kubernetes ServiceAccount (KSA) impersonate a Google Service Account (GSA) when talking to GCS. This gives us: 1) No extra secrets in your images or manifests; 2) Least‑privilege access via IAM roles on the GSA; 3) Automatic token refresh and IAM auditing
+
+Steps to configure
+Enable Workload Identity on your GKE cluster
+
+      gcloud container clusters update booking-opt-dev \
+      --project=nullogism \
+      --zone=us-central1-a \
+      --workload-pool=nullogism.svc.id.goog
+
+Create the Google Service Account (GSA)
+      gcloud iam service-accounts create booking-backend-sa \
+      --project=nullogism \
+      --display-name="BookingOpt Backend Service Account"
+
+
+Grant your GSA the necessary IAM roles
+      # Storage Admin so it can read/write JSON & PNG blobs
+      gcloud projects add-iam-policy-binding nullogism \
+      --member="serviceAccount:booking-backend-sa@nullogism.iam.gserviceaccount.com" \
+      --role="roles/storage.admin"
+
+Allow the KSA to impersonate the GSA
+      # Bind the Workload Identity role to let the KSA act as the GSA
+      gcloud iam service-accounts add-iam-policy-binding \
+      booking-backend-sa@nullogism.iam.gserviceaccount.com \
+      --member="serviceAccount:nullogism.svc.id.goog[default/backend-sa]" \
+      --role="roles/iam.workloadIdentityUser"
+
+Create your Kubernetes ServiceAccount (KSA)
+
+      yaml
+      
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+      name: backend-sa
+      namespace: default
+      annotations:
+         # Link this KSA to the GSA
+         iam.gke.io/gcp-service-account: booking-backend-sa@nullogism.iam.gserviceaccount.com
+
+
+Use the KSA in your Deployment spec
+      yaml
+
+      spec:
+      template:
+         spec:
+            serviceAccountName: backend-sa
+
+
+Once deployed, any pod using serviceAccountName: backend-sa will automatically obtain short‑lived tokens for booking-backend-sa@nullogism.iam.gserviceaccount.com, allowing it to call GCS (and other GCP APIs as granted) without manual key files.
+
+
+commands to roll out optimize k8s
+
+      kubectl apply -f k8s/optimize/optimize-deployment.yaml
+      kubectl apply -f k8s/optimize/optimize-service.yaml
+
+      # to pick up a newly‑built image:
+      kubectl rollout restart deployment optimize

@@ -1,0 +1,96 @@
+{
+    "ProblemId": "6666",
+    "MinimumStay": 5.0,
+    "NewReservations": [],
+    "MinimumStayByDay": {},
+    "Reservations": [
+        {
+            "Name": "1",
+            "Arrival": "2025-07-30",
+            "Length": 9.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "2",
+            "Arrival": "2025-08-18",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "3",
+            "Arrival": "2025-08-11",
+            "Length": 13.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "2",
+            "IsLocked": true
+        },
+        {
+            "Name": "4",
+            "Arrival": "2025-08-11",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "5",
+            "Arrival": "2025-08-23",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "7",
+            "Arrival": "2025-08-10",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "8",
+            "Arrival": "2025-08-09",
+            "Length": 6.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        },
+        {
+            "Name": "9",
+            "Arrival": "2025-08-21",
+            "Length": 7.0,
+            "AdjacencyGroup": "None",
+            "AssignedRoom": "None"
+        }
+    ],
+    "Rooms": [
+        {
+            "RoomNumber": "1",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "2"
+            ]
+        },
+        {
+            "RoomNumber": "2",
+            "RoomType": null,
+            "AdjacentRooms": [
+                "1"
+            ]
+        },
+        {
+            "RoomNumber": "3",
+            "RoomType": null,
+            "AdjacentRooms": []
+        },
+        {
+            "RoomNumber": "4",
+            "RoomType": null,
+            "AdjacentRooms": []
+        },
+        {
+            "RoomNumber": "5",
+            "RoomType": null,
+            "AdjacentRooms": []
+        }
+    ]
+}

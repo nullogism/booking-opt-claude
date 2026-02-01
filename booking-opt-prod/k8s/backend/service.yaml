@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: dev
+  labels:
+    app: booking-opt-backend
+spec:
+  type: ClusterIP             # Internal‐only service
+  selector:
+    app: booking-opt-backend  # Routes traffic to Pods with this label
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80                   # Cluster‐visible port
+    targetPort: 8000           # Pod containerPort

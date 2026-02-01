@@ -1,0 +1,2903 @@
+{
+    "ProcessingDate": "2025-05-18",
+    "ProblemId": "4444",
+    "Succeeded": true,
+    "ClosedArrivals": {
+        "2021-03-13": 1,
+        "2021-03-28": 1,
+        "2021-03-30": 1,
+        "2021-03-31": 1,
+        "2021-04-02": 1,
+        "2021-04-03": 1,
+        "2021-04-04": 1,
+        "2021-04-08": 1,
+        "2021-04-09": 1,
+        "2021-04-11": 1,
+        "2021-04-13": 1,
+        "2021-04-14": 1,
+        "2021-04-15": 1,
+        "2021-04-17": 1,
+        "2021-04-18": 1,
+        "2021-04-20": 1,
+        "2021-04-21": 1,
+        "2021-04-23": 1,
+        "2021-04-24": 1,
+        "2021-04-26": 1,
+        "2021-04-27": 1,
+        "2021-04-28": 1,
+        "2021-04-29": 1
+    },
+    "ClosedDepartures": {
+        "2021-03-17": 1,
+        "2021-03-18": 1,
+        "2021-03-30": 1,
+        "2021-04-01": 1,
+        "2021-04-02": 1,
+        "2021-04-03": 1,
+        "2021-04-05": 1,
+        "2021-04-08": 1,
+        "2021-04-10": 1,
+        "2021-04-11": 1,
+        "2021-04-13": 1,
+        "2021-04-14": 1,
+        "2021-04-15": 1,
+        "2021-04-16": 1,
+        "2021-04-18": 1,
+        "2021-04-19": 1,
+        "2021-04-21": 1,
+        "2021-04-22": 1,
+        "2021-04-23": 1,
+        "2021-04-24": 1,
+        "2021-04-25": 1,
+        "2021-04-26": 1,
+        "2021-04-28": 1
+    },
+    "MinStays": {
+        "2021-03-07": 5,
+        "2021-03-08": 5,
+        "2021-03-09": 1.0,
+        "2021-03-10": 5,
+        "2021-03-11": 5,
+        "2021-03-12": 5.0,
+        "2021-03-13": 5,
+        "2021-03-14": 5.0,
+        "2021-03-15": 5,
+        "2021-03-16": 5,
+        "2021-03-17": 2.0,
+        "2021-03-18": 2.0,
+        "2021-03-19": 5,
+        "2021-03-20": 5,
+        "2021-03-21": 5,
+        "2021-03-22": 5,
+        "2021-03-23": 5,
+        "2021-03-24": 5,
+        "2021-03-25": 3.0,
+        "2021-03-26": 3.0,
+        "2021-03-27": 3.0,
+        "2021-03-28": 4.0,
+        "2021-03-29": 4.0,
+        "2021-03-30": 4.0,
+        "2021-03-31": 5,
+        "2021-04-01": 5.0,
+        "2021-04-02": 5,
+        "2021-04-03": 5,
+        "2021-04-04": 5,
+        "2021-04-05": 4.0,
+        "2021-04-06": 4.0,
+        "2021-04-07": 4.0,
+        "2021-04-08": 4.0,
+        "2021-04-09": 5,
+        "2021-04-10": 2.0,
+        "2021-04-11": 2.0,
+        "2021-04-12": 5.0,
+        "2021-04-13": 5,
+        "2021-04-14": 5,
+        "2021-04-15": 5,
+        "2021-04-16": 4.0,
+        "2021-04-17": 4.0,
+        "2021-04-18": 4.0,
+        "2021-04-19": 4.0,
+        "2021-04-20": 5,
+        "2021-04-21": 5,
+        "2021-04-22": 5.0,
+        "2021-04-23": 5,
+        "2021-04-24": 5,
+        "2021-04-25": 2.0,
+        "2021-04-26": 2.0,
+        "2021-04-27": 5,
+        "2021-04-28": 5,
+        "2021-04-29": 5
+    },
+    "MaxStays": {
+        "2021-03-09": 1.0,
+        "2021-03-12": 7.0,
+        "2021-03-25": 4.0,
+        "2021-03-26": 5.0,
+        "2021-03-29": 6.0,
+        "2021-04-01": 11.0,
+        "2021-04-12": 5.0,
+        "2021-04-17": 4.0
+    },
+    "OptimizedPlan": [
+        {
+            "Name": "1",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "2",
+            "IsLocked": false,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "3",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "4",
+            "IsLocked": false,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 9.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "5",
+            "IsLocked": false,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 4.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "7",
+            "IsLocked": false,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 11.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "8",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "9",
+            "IsLocked": false,
+            "AssignedRoom": "9",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 27.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "10",
+            "IsLocked": false,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-03-07",
+            "Length": 2.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "6",
+            "IsLocked": false,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-03-11",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "11",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-03-13",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "12",
+            "IsLocked": false,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-03-16",
+            "Length": 10.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "13",
+            "IsLocked": false,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-03-17",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "14",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-03-18",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "15",
+            "IsLocked": false,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-03-18",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "16",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-03-19",
+            "Length": 6.0,
+            "AdjacencyGroup": "1.0",
+            "TestStay": false
+        },
+        {
+            "Name": "17",
+            "IsLocked": false,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-03-19",
+            "Length": 6.0,
+            "AdjacencyGroup": "1.0",
+            "TestStay": false
+        },
+        {
+            "Name": "18",
+            "IsLocked": false,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-03-19",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "19",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-03-19",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "20",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-03-23",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "21",
+            "IsLocked": false,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-03-23",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "22",
+            "IsLocked": false,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-03-24",
+            "Length": 3.0,
+            "AdjacencyGroup": "2.0",
+            "TestStay": false
+        },
+        {
+            "Name": "23",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-03-24",
+            "Length": 3.0,
+            "AdjacencyGroup": "2.0",
+            "TestStay": false
+        },
+        {
+            "Name": "24",
+            "IsLocked": true,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-03-26",
+            "Length": 10.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "25",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-03-27",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "26",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-03-28",
+            "Length": 8.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "27",
+            "IsLocked": true,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-03-29",
+            "Length": 12.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "28",
+            "IsLocked": true,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-03-30",
+            "Length": 13.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "29",
+            "IsLocked": true,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-03-31",
+            "Length": 11.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "30",
+            "IsLocked": true,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-03-31",
+            "Length": 11.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "31",
+            "IsLocked": false,
+            "AssignedRoom": "9",
+            "RoomType": "",
+            "Arrival": "2021-04-03",
+            "Length": 11.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "32",
+            "IsLocked": false,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-04-04",
+            "Length": 8.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "33",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-04-05",
+            "Length": 1.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "34",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-04-06",
+            "Length": 14.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "35",
+            "IsLocked": true,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-04-09",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "36",
+            "IsLocked": false,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-03-10",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "37",
+            "IsLocked": false,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-04-11",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "38",
+            "IsLocked": false,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-04-11",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "39",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-04-12",
+            "Length": 10.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "40",
+            "IsLocked": true,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-04-12",
+            "Length": 8.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "41",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-04-12",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "42",
+            "IsLocked": false,
+            "AssignedRoom": "9",
+            "RoomType": "",
+            "Arrival": "2021-04-14",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "43",
+            "IsLocked": true,
+            "AssignedRoom": "8",
+            "RoomType": "",
+            "Arrival": "2021-04-17",
+            "Length": 13.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "44",
+            "IsLocked": false,
+            "AssignedRoom": "2",
+            "RoomType": "",
+            "Arrival": "2021-04-18",
+            "Length": 7.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "45",
+            "IsLocked": false,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-04-18",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "46",
+            "IsLocked": false,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-04-20",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "47",
+            "IsLocked": true,
+            "AssignedRoom": "6",
+            "RoomType": "",
+            "Arrival": "2021-04-20",
+            "Length": 10.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "48",
+            "IsLocked": false,
+            "AssignedRoom": "7",
+            "RoomType": "",
+            "Arrival": "2021-04-20",
+            "Length": 5.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "49",
+            "IsLocked": false,
+            "AssignedRoom": "1",
+            "RoomType": "",
+            "Arrival": "2021-04-24",
+            "Length": 6.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "50",
+            "IsLocked": false,
+            "AssignedRoom": "9",
+            "RoomType": "",
+            "Arrival": "2021-04-27",
+            "Length": 3.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "51",
+            "IsLocked": true,
+            "AssignedRoom": "4",
+            "RoomType": "",
+            "Arrival": "2021-04-27",
+            "Length": 3.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "52",
+            "IsLocked": false,
+            "AssignedRoom": "5",
+            "RoomType": "",
+            "Arrival": "2021-04-27",
+            "Length": 3.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        },
+        {
+            "Name": "53",
+            "IsLocked": false,
+            "AssignedRoom": "3",
+            "RoomType": "",
+            "Arrival": "2021-04-27",
+            "Length": 3.0,
+            "AdjacencyGroup": null,
+            "TestStay": false
+        }
+    ],
+    "ReOptimizedPlans": [
+        {
+            "Day": 737899,
+            "Length": 10,
+            "OptimizedPlan": [
+                {
+                    "Name": "1",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "2",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "3",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "4",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "5",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "7",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "8",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "9",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "10",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "6",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "11",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "12",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "13",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "14",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "15",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "16",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "17",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "18",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "19",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "20",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "21",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "22",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "23",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "24",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "25",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "26",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "27",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "28",
+                    "IsLocked": true,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "29",
+                    "IsLocked": true,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "30",
+                    "IsLocked": true,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "31",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "32",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "33",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "34",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "35",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "36",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "37",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "38",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "39",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "40",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "41",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "42",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "43",
+                    "IsLocked": true,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "44",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "45",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "46",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "47",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "48",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "49",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "50",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "51",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "52",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "53",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "Test_Max",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-19",
+                    "Length": -10,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                }
+            ]
+        },
+        {
+            "Day": 737899,
+            "Length": 11,
+            "OptimizedPlan": [
+                {
+                    "Name": "1",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "2",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "3",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "4",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "5",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "7",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "8",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "9",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "10",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "6",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "11",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "12",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "13",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "14",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "15",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "16",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "17",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "18",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "19",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "20",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "21",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "22",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "23",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "24",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "25",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "26",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "27",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "28",
+                    "IsLocked": true,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "29",
+                    "IsLocked": true,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "30",
+                    "IsLocked": true,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "31",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "32",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "33",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "34",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "35",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "36",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "37",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "38",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "39",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "40",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "41",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "42",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "43",
+                    "IsLocked": true,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "44",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "45",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "46",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "47",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "48",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "49",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "50",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "51",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "52",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "53",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "Test_Max",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-19",
+                    "Length": -11,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                }
+            ]
+        },
+        {
+            "Day": 737902,
+            "Length": 7,
+            "OptimizedPlan": [
+                {
+                    "Name": "1",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "2",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "3",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "4",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "5",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "7",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "8",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "9",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "10",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "6",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "11",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "12",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "13",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "14",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "15",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "16",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "17",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "18",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "19",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "20",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "21",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "22",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "23",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "24",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "25",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "26",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "27",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "28",
+                    "IsLocked": true,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "29",
+                    "IsLocked": true,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "30",
+                    "IsLocked": true,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "31",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "32",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "33",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "34",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "35",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "36",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "37",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "38",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "39",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "40",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "41",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "42",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "43",
+                    "IsLocked": true,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "44",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "45",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "46",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "47",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "48",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "49",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "50",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "51",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "52",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "53",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "Test_Max",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-22",
+                    "Length": -7,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                }
+            ]
+        },
+        {
+            "Day": 737902,
+            "Length": 8,
+            "OptimizedPlan": [
+                {
+                    "Name": "1",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "2",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "3",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "4",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "5",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "7",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "8",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "9",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "10",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "6",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "11",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "12",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "13",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "14",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "15",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "16",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "17",
+                    "IsLocked": false,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "1.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "18",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "19",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "20",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "21",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "22",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "23",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": "2.0",
+                    "TestStay": false
+                },
+                {
+                    "Name": "24",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "25",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "26",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "27",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "28",
+                    "IsLocked": true,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "29",
+                    "IsLocked": true,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "30",
+                    "IsLocked": true,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "31",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "32",
+                    "IsLocked": false,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "33",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "34",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "35",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "36",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "37",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "38",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "39",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "40",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "41",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "42",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "43",
+                    "IsLocked": true,
+                    "AssignedRoom": "8",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "44",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "45",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "46",
+                    "IsLocked": false,
+                    "AssignedRoom": "3",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "47",
+                    "IsLocked": true,
+                    "AssignedRoom": "6",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "48",
+                    "IsLocked": false,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "49",
+                    "IsLocked": false,
+                    "AssignedRoom": "2",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "50",
+                    "IsLocked": false,
+                    "AssignedRoom": "1",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "51",
+                    "IsLocked": true,
+                    "AssignedRoom": "4",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "52",
+                    "IsLocked": false,
+                    "AssignedRoom": "5",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "53",
+                    "IsLocked": false,
+                    "AssignedRoom": "9",
+                    "RoomType": "",
+                    "Arrival": "2021-04-27",
+                    "Length": -3.0,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                },
+                {
+                    "Name": "Test_Max",
+                    "IsLocked": false,
+                    "AssignedRoom": "7",
+                    "RoomType": "",
+                    "Arrival": "2021-04-22",
+                    "Length": -8,
+                    "AdjacencyGroup": null,
+                    "TestStay": false
+                }
+            ]
+        }
+    ],
+    "ScheduleStart": "2021-03-07",
+    "ScheduleEnd": "2021-04-30",
+    "Rooms": [
+        {
+            "RoomType": null,
+            "RoomNumber": "1",
+            "AdjacentRooms": [
+                "2"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "2",
+            "AdjacentRooms": [
+                "1",
+                "3"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "3",
+            "AdjacentRooms": [
+                "2"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "4",
+            "AdjacentRooms": [
+                "5"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "5",
+            "AdjacentRooms": [
+                "4"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "6",
+            "AdjacentRooms": [
+                "7"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "7",
+            "AdjacentRooms": [
+                "6"
+            ]
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "8",
+            "AdjacentRooms": []
+        },
+        {
+            "RoomType": null,
+            "RoomNumber": "9",
+            "AdjacentRooms": []
+        }
+    ]
+}

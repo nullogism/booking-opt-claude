@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimize
+  namespace: prod
+  labels:
+    app: booking-opt-optimize   # Labels for selector & organization
+spec:  
+  replicas: 1                  # Number of identical Pods to run
+  selector:
+    matchLabels:
+      app: booking-opt-optimize # Must match .template.metadata.labels
+  template:
+    metadata:
+      labels:
+        app: booking-opt-optimize
+    spec:     
+      serviceAccountName: backend-sa        # re‑use the backend KSA (Workload Identity)
+      containers:
+      - name: optimize
+        image: us-central1-docker.pkg.dev/nullogism/booking-opt-optimize/optimize:latest          
+        imagePullPolicy: Always # Always pull latest tag on deploy
+        env:
+          - name: INPUT_BUCKET
+            value: booking-opt-json
+          - name: OUTPUT_BUCKET
+            value: booking-opt-optimized
+        ports:
+        - containerPort: 8000   # Container listens on this port
+          name: http
+        # Startup / shutdown probes
+        #readinessProbe:
+          #httpGet:
+            #path: /health     # Your FastAPI health endpoint
+            #port: 8000
+          #initialDelaySeconds: 5
+          #periodSeconds: 10
+        # Resource requests/limits guide the scheduler and protect noisy neighbours
+        resources:
+          requests:
+            cpu:    "175m"
+            memory: "256Mi"
+          limits:
+            cpu:    "400m"
+            memory: "1Gi"

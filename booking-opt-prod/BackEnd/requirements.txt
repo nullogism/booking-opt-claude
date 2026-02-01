@@ -1,0 +1,6 @@
+# requirements.txt
+fastapi
+uvicorn[standard]
+python-multipart
+httpx>=0.23.0
+google-cloud-storage>=2.0

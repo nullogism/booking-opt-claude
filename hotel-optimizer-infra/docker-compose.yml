@@ -1,0 +1,134 @@
+version: "3.8"
+
+# Hotel Booking Optimizer - Infrastructure Stack
+# 
+# Architecture:
+#   nginx (reverse proxy + rate limiting)
+#     └── api (your existing optimizer image)
+#     └── worker (same image, runs queue jobs)
+#   redis (job queue + rate limit state)
+#
+# Usage:
+#   docker-compose up -d
+#   docker-compose logs -f
+#
+# Replace 'your-optimizer-image:latest' with your actual image name
+
+services:
+  # =============================================================
+  # NGINX - Reverse Proxy & Rate Limiting
+  # =============================================================
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro  # Mount SSL certs here
+    depends_on:
+      - api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # =============================================================
+  # API - BookingOpt FastAPI Service
+  # =============================================================
+  api:
+    build:
+      context: ../app/api
+      dockerfile: Dockerfile
+    image: bookingopt-api:latest
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - MAX_QUEUED_JOBS_PER_USER=3
+      - JOB_RESULT_TTL=3600
+    expose:
+      - "8000"  # Internal only - nginx handles external traffic
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    # Resource limits - adjust based on your optimization workload
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # =============================================================
+  # WORKER - Background Optimization Processing
+  # =============================================================
+  worker:
+    build:
+      context: ../app/worker
+      dockerfile: Dockerfile
+    image: bookingopt-worker:latest
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAX_JOB_DURATION=120
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    # Worker gets more resources for heavy optimization (scipy calculations)
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 3G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    # To scale workers: docker-compose up -d --scale worker=2
+
+  # =============================================================
+  # REDIS - Job Queue & Rate Limit State
+  # =============================================================
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 100mb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =============================================================
+  # OPTIONAL: Scheduled Jobs (Start-of-Day Reports)
+  # =============================================================
+  # Uncomment if you need scheduled batch processing
+  # scheduler:
+  #   image: your-optimizer-image:latest
+  #   environment:
+  #     - REDIS_URL=redis://redis:6379/0
+  #     - WORKER_MODE=scheduler
+  #   depends_on:
+  #     - redis
+  #   restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+
+networks:
+  default:
+    name: hotel-optimizer-network

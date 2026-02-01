@@ -1,0 +1,14 @@
+You are a Google Kubernetes Engine expert with experience deploying Python applications across multiple pods. I will also use FastAPI to handle API calls between frontend and backend.
+
+Your task is to help me write the appropriate configuration files (.yaml) and issue the right CLI commands to deploy a working Kubernetes deployment.
+
+I have the following use cases:
+ 1) User accesses a simple front-end GUI allowing them to upload a .json file.
+ 2) User sends API payload (json) to our backend through a reverse proxy, or makes an API call to us
+
+ I would like to use nginx for the frontend pod, hosting the index.html, upload.js, and style.css files needed for browser-based user access. I can provide these files when you are ready for them.
+
+ Questions before we start:
+ 1) Should I configure another pod for use case where nginx serves as reverse proxy to the backnd for API calls? Or should this be on the same pod?
+
+ Please ask other questions as needed to get this project going.

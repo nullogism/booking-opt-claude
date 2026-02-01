@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-frontend
+  namespace: dev
+  labels:
+    app: booking-opt-frontend
+spec:
+  replicas: 1                  # Two replicas for high availability
+  selector:
+    matchLabels:
+      app: booking-opt-frontend
+  template:
+    metadata:
+      labels:
+        app: booking-opt-frontend
+    spec:
+      containers:
+      - name: nginx
+        image: us-central1-docker.pkg.dev/nullogism/booking-opt-frontend/frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80     # nginx listens here
+        # Mount our custom nginx.conf from the ConfigMap
+        volumeMounts:
+        - name: config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        resources:
+          requests:
+            cpu:    "30m"
+            memory: "128Mi"
+          limits:
+            cpu:    "100m"
+            memory: "256Mi"
+      volumes:
+      - name: config
+        configMap:
+          name: nginx-config   # Must match metadata.name in frontend-configmap.yaml
