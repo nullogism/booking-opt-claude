@@ -10,8 +10,8 @@ dict = json.load(jsonString)
 write to filePath ( json.dump(dict, filePath, indent = 4))
 ) 
 '''
-from Data.Room import Room
-from Data.Reservation import Reservation
+from .Room import Room
+from .Reservation import Reservation
 import json
 
 

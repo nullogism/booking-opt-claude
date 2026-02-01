@@ -13,9 +13,9 @@ write to filePath ( json.dump(dict, filePath, indent = 4))
 
 import json
 import datetime
-from Data.Assignment import Assignment
-from Data.ReOptimizedPlan import ReOptimizedPlan
-from Data.Room import Room
+from .Assignment import Assignment
+from .ReOptimizedPlan import ReOptimizedPlan
+from .Room import Room
 
 class ProblemResult:
 

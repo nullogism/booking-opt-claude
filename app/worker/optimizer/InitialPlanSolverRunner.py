@@ -1,7 +1,7 @@
 
-from Models.InitialPlanSolver import InitialPlanSolver
+from .Models.InitialPlanSolver import InitialPlanSolver
 
-import SolverData.InitialPlanSolverData as initData 
+from .SolverData import InitialPlanSolverData as initData 
 
 class InitialPlanSolverRunner:
 	def __init__(self, problemData, maxDummy = 2):

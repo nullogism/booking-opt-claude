@@ -2,18 +2,18 @@
 Solver runner
 '''
 
-from Data.ProblemData import ProblemData
-from Data.ProblemResult import ProblemResult
-from Data.Assignment import Assignment
-from Data.ReOptimizedPlan import ReOptimizedPlan
+from .Data.ProblemData import ProblemData
+from .Data.ProblemResult import ProblemResult
+from .Data.Assignment import Assignment
+from .Data.ReOptimizedPlan import ReOptimizedPlan
 
 from datetime import date
 
 
-import InitialPlanSolverRunner as sr
-import FixedPlanRestrictions.InitialRestrictions as ir
-import RestrictionSolverRunner as rsr
-import FixedPlanRestrictions.FinalRestrictions as fr
+from . import InitialPlanSolverRunner as sr
+from .FixedPlanRestrictions import InitialRestrictions as ir
+from . import RestrictionSolverRunner as rsr
+from .FixedPlanRestrictions import FinalRestrictions as fr
 import json
 import time
 

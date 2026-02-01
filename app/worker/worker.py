@@ -7,7 +7,7 @@ import os
 import sys
 import logging
 from typing import Dict, Any
-from rq import Worker, Queue, Connection
+from rq import Worker, Queue
 import redis
 
 # Add optimizer module to path
@@ -97,13 +97,12 @@ def run_worker():
     logger.info(f"Connecting to Redis at {REDIS_URL}")
     redis_conn = redis.from_url(REDIS_URL)
 
-    with Connection(redis_conn):
-        worker = Worker(
-            queues=["optimization"],
-            connection=redis_conn
-        )
-        logger.info("BookingOpt worker started, listening to 'optimization' queue")
-        worker.work(with_scheduler=True)
+    worker = Worker(
+        queues=["optimization"],
+        connection=redis_conn
+    )
+    logger.info("BookingOpt worker started, listening to 'optimization' queue")
+    worker.work(with_scheduler=True)
 
 
 if __name__ == "__main__":

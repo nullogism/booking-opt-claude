@@ -1,6 +1,6 @@
 
-from Models.RestrictionSolver import RestrictionSolver
-import SolverData.RestrictionSolverData as rd 
+from .Models.RestrictionSolver import RestrictionSolver
+from .SolverData import RestrictionSolverData as rd 
 
 
 

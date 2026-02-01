@@ -63,6 +63,13 @@ class ReservationInput(BaseModel):
     AssignedRoom: str = "None"
 
 
+class RoomInput(BaseModel):
+    """Individual room in the hotel"""
+    RoomNumber: str
+    RoomType: Optional[str] = None
+    AdjacentRooms: list[str] = Field(default_factory=list)
+
+
 class OptimizationRequest(BaseModel):
     """
     Request to optimize room assignments.
@@ -73,6 +80,7 @@ class OptimizationRequest(BaseModel):
     Reservations: list[ReservationInput] = Field(..., description="List of reservations to optimize")
     NewReservations: list[ReservationInput] = Field(default_factory=list, description="New reservations to add")
     MinimumStayByDay: Dict[str, float] = Field(default_factory=dict, description="Day-specific minimum stay rules")
+    Rooms: list[RoomInput] = Field(..., description="List of available rooms")
 
     class Config:
         json_schema_extra = {
