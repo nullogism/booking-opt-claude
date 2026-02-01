@@ -3,12 +3,13 @@ BookingOpt Worker - Redis Queue Worker
 Processes room optimization jobs from Redis queue
 """
 
+import logging
 import os
 import sys
-import logging
-from typing import Dict, Any
-from rq import Worker, Queue
+from typing import Any
+
 import redis
+from rq import Worker
 
 # Add optimizer module to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -28,9 +29,9 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
 
 def run_optimization_task(
     hotel_id: str,
-    optimization_params: Dict[str, Any],
+    optimization_params: dict[str, Any],
     user_id: str = None
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """
     Run the booking optimization algorithm.
 
