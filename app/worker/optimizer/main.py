@@ -1,53 +1,35 @@
-
-from google.cloud import pubsub_v1, storage
-import SolverRunner as Runner
 import json
-import re
+import sys
+import os
+sys.path.append(os.path.dirname('../BookingOpt/'))
 
-subscriber = pubsub_v1.SubscriberClient()
-subscription_path = subscriber.subscription_path("nullogism", "optimize-sub")
-storage_client = storage.Client()
+import SolverRunner as Runner
+from FeasibilitySolverRunner import FeasibilityRunner
 
-def callback(message):
-	data = json.loads(message.data.decode())
-	bucket, name = data["bucket"], data["name"]
-	
-	match = re.match(r"^(.*?)_valid_([a-zA-Z0-9]{6}).json$", name)
+authKey = "!!a6c3z@5123!%@%"
 
-	if match:
-		base_name_part = match.group(1)
-		guid_part = match.group(2)
+from typing import Union
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.post("/optimize")
+def optimize(input_json: dict, key):
 	
-		print(f"Optimizer: Base='{base_name_part}', GUID='{guid_part}'")
-	
-		output_filename = f"{base_name_part}_optimized_{guid_part}.json"
-		print(f"Optimizer will output: '{output_filename}'")
-	
-		blob = storage_client.bucket(bucket).blob(name)
-		raw_json = blob.download_as_bytes()
-		success, result = Runner.Run(json.loads(raw_json))
+	scn = input_json
+	try:
+		if key.strip() != authKey:
+			raise Exception(f"Authentication failed for key: {key}")
 		
+		restrOnly = scn["RestrictionsForInitialPlan"] if "RestrictionsForInitialPlan" in scn else False
 		
-		if not success:
-			out_blob = storage_client.bucket("booking-opt-failures").blob(output_filename)
-			out_blob.upload_from_string(json.dumps(result), content_type = "application/json")
-			message.ack()
-			
-			return()
-			
-		out_blob = storage_client.bucket("booking-opt-optimized").blob(output_filename)
-		out_blob.upload_from_string(json.dumps(result), content_type = "application/json")
+		if len(scn["NewReservations"]) > 0 and not restrOnly:
+			runner = FeasibilityRunner()
+			success, result = runner.Run(scn)
+		else:
+			success, result = Runner.Run(scn)
 		
-		message.ack()
-	
-	
-	else:
-		print(f"Optimizer Error: Filename '{name}' not in expected format")
-		message.ack()
-	
-	
-	
-future = subscriber.subscribe(subscription_path, callback = callback)
-
-# keep the process alive
-future.result()
+		return result
+	except Exception as e:
+		print(e)

@@ -1,15 +1,17 @@
 import numpy as np
+from datetime import date
 
 class InitialRestrictions:
 
-	def __init__(self, optimizationAssignment, data):
+	def __init__(self, optimizationAssignment = None, data = None):
+		
 		self.MinStayStartingOnDay = {}
 		self.FixedMaxStayStartingOnDay = {}
 		self.AbsoluteMaxStaysStartingOnDay ={}
 		
 		self.OccupancyPerDay = {}
 		self.FullyBookedDays = []
-		self.FirstDepartureDay = data.MaxEnd
+		self.FirstDepartureDay = data.MaxEnd if data is not None else -1
 
 		
 		self.DayRoomsFirstFilled = -1
@@ -21,7 +23,8 @@ class InitialRestrictions:
 		self.ClosedArrival = {}
 		self.ClosedDeparture ={}
 		
-		self.Generate(optimizationAssignment, data)
+		if optimizationAssignment is not None:
+			self.Generate(optimizationAssignment, data)
 			
 	def Generate(self, optimizationAssignment, data):
 		
@@ -55,11 +58,22 @@ class InitialRestrictions:
 			roomArrivals[r] = np.sort(roomArrivals[r])
 			roomDepartures[r] = np.sort(roomDepartures[r])
 			
-		fullOcc = data.NumberOfRooms
+		self.GetOccupancyPerDayAndAbsoluteMaxStays(data)
+		
+		self.FillMinMaxStays(data, roomArrivals, roomDepartures)
 
+		self.GenerateClosures(data, roomArrivals, roomDepartures)
+		#self.RemoveRedundantRestrictions(data)
+	
+	
+	def GetOccupancyPerDayAndAbsoluteMaxStays(self, data, ignoreTest = False):
+		fullOcc = data.NumberOfRooms
+		
 		for i in range(data.ScheduleEnd - data.ScheduleStart):
 			occ = 0
-			for s in optimizationAssignment:
+			for s in data.StayDict:
+				if ignoreTest and data.TestDict[s]:
+					continue
 				max1 = data.StayDict[s][1]
 				min1 = data.StayDict[s][0]
 				if min1 <= data.ScheduleStart + i and max1 > data.ScheduleStart+i:
@@ -67,13 +81,9 @@ class InitialRestrictions:
 			self.OccupancyPerDay[data.ScheduleStart + i] = occ
 			if occ == fullOcc:
 				self.FullyBookedDays.append(data.ScheduleStart + i)
-		
 		# put a fully booked day at the end of the schedule
-		self.FullyBookedDays.append(endOfSchedule)
-
-		
-		nextFullIndex = 0
-		
+		self.FullyBookedDays.append(data.ScheduleEnd)
+		nextFullIndex = 0	
 		for day in self.OccupancyPerDay:
 			
 			if day < self.FullyBookedDays[nextFullIndex]:
@@ -81,11 +91,6 @@ class InitialRestrictions:
 			else:
 				self.AbsoluteMaxStaysStartingOnDay[day] = 0
 				nextFullIndex += 1
-		
-		self.FillMinMaxStays(data, roomArrivals, roomDepartures)
-
-		self.GenerateClosures(data, roomArrivals, roomDepartures)
-		#self.RemoveRedundantRestrictions(data)
 		
 			
 	def FillMinMaxStays(self, data, roomArrivals, roomDepartures):
@@ -95,7 +100,7 @@ class InitialRestrictions:
 
 		naiveMaxStays = {}
 
-		minGaps = np.ones(len(self.OccupancyPerDay)) * (data.MaxEnd-data.MinStart)
+		minGaps = np.ones(len(self.OccupancyPerDay)) * (data.ScheduleEnd-data.ScheduleStart)
 
 		days = list(self.OccupancyPerDay.keys())
 		
@@ -107,6 +112,7 @@ class InitialRestrictions:
 			day = days[i]
 			naiveMaxStays[day] = 0.0
 			gapsObserved = {}
+			minStayForDay = data.MinStayByDay[day]
 			
 			
 			for j in range(data.NumberOfRooms):
@@ -116,7 +122,7 @@ class InitialRestrictions:
 
 				if day < roomArrivals[r][nextArrivalIndex[j]]:
 					max_r = roomArrivals[r][nextArrivalIndex[j]] - day
-					min_r = np.min([max_r,data.MinStay])
+					min_r = np.min([max_r, minStayForDay])
 					naiveMaxStays[day] = np.max([naiveMaxStays[day],max_r]) 
 		
 				if day >= data.MaxEnd:
@@ -135,12 +141,11 @@ class InitialRestrictions:
 						max_r = 0
 						min_r = 0
 					else: 
-						
 						max_r = roomArrivals[r][nextArrivalIndex[j]] - day
-						min_r = np.min([max_r, data.MinStay])
+						min_r = np.min([max_r, minStayForDay])
 			
 					if min_r > 0:
-						if min_r < data.MinStay:
+						if min_r < minStayForDay:
 							# record the number of gaps smaller than MinStay observed each day
 							# will use this for re-optimizing the max stays
 							if int(min_r) in gapsObserved:
@@ -165,17 +170,13 @@ class InitialRestrictions:
 	
 		for d in range(len(self.OccupancyPerDay)):
 			day = days[d]
-			self.MinStayStartingOnDay[day] = min([minGaps[d],data.MinStay])
-			#if day == data.ScheduleStart:
-			#	self.MinStayStartingOnDay[day] = min(self.MinStayStartingOnDay[day], self.FixedMaxStayStartingOnDay[day])
+			minStayForDay = data.MinStayByDay[day]
+			self.MinStayStartingOnDay[day] = min([minGaps[d],minStayForDay])
 			if day < self.FirstDepartureDay:
-				self.MinStayStartingOnDay[day] = data.MinStay
+				self.MinStayStartingOnDay[day] = minStayForDay
 		
 				
 	def GenerateClosures(self, data, roomArrivals, roomDepartures):
-		
-		#sketch of restrictions...
-		# get min/max stay and restrictions with locked rooms
 		
 		nextArrivalIndex = np.zeros(data.NumberOfRooms,dtype = int)
 		nextDepartureIndex = np.zeros(data.NumberOfRooms,dtype = int)
@@ -186,18 +187,24 @@ class InitialRestrictions:
 		cd = {}
 		ca = {}
 		
+
+		
 		days = list(self.OccupancyPerDay.keys())
 		emptyRooms = True
 		
 		roomsFilled = np.zeros(data.NumberOfRooms)
 		
-		startingDeparture = data.MinStart - data.MinStay
+		startingDeparture = data.ScheduleStart - data.MinStay
 		
 		for i in range(len(days)):
 			day = days[i]
+			minStayForDay = data.MinStayByDay[day]
 			roomClosedArrival = np.ones(data.NumberOfRooms)
 			roomClosedDeparture = np.ones(data.NumberOfRooms)
-
+			
+			avoidedByCa = []
+			avoidedByCd = []
+			
 			for j in range(data.NumberOfRooms):
 				r = data.Rooms[j]
 				
@@ -219,9 +226,12 @@ class InitialRestrictions:
 					roomClosedDeparture[j] = 0
 				if day == days[len(days)-1]:
 					roomClosedDeparture[j] = 0
-					
-				
-				if day - previousDeparture >= data.MinStay and nextArrival - day >= data.MinStay:
+				try:
+					minStayForPrevious = data.MinStayByDay[int(previousDeparture)] if int(previousDeparture) in data.MinStayByDay else data.MinStay
+				except:
+					print(date.fromordinal(int(previousDeparture)))
+							
+				if day - previousDeparture >= minStayForPrevious and nextArrival - day >= minStayForDay:
 					roomClosedDeparture[j] = 0
 					roomClosedArrival[j] = 0
 		 		
@@ -229,7 +239,6 @@ class InitialRestrictions:
 					roomClosedArrival[j] = 0
 		
 			if np.sum(roomClosedArrival) == data.NumberOfRooms:
-			
 				self.ClosedArrival[day] = 1
 				if day > data.MaxEnd and day < data.ScheduleEnd:
 					self.ClosedArrival[day] = 1

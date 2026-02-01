@@ -1,5 +1,5 @@
 
-import numpy as np
+import numpy as np 
 
 class FinalRestrictions:
 
@@ -38,7 +38,9 @@ class FinalRestrictions:
 		self.MinStayCoveringDay = {}
 		self.MaxStayCoveringDay = {}
 		
-		
+		self.AvoidedStaysCA = {} # dict day CA : [reservation("avoided", start, length)]
+		self.AvoidedStaysCD = {} # dict day CD : reservation("avoided", start, length)
+		self.AvoidedStaysMax = {}
 	
 	def ClearComputedStays(self):
 		# Clear these if recomputing:
@@ -46,19 +48,18 @@ class FinalRestrictions:
 		self.ComputedMinStaysStartingOnDay = {}	
 	
 	def Fill(self, data):
-		self.FillMinStaysCoveringDay(data.MaxEnd)
+		self.FillMinStaysCoveringDay(data.ScheduleEnd)
 		self.FillMaxStaysCoveringDay(data)
-		self.UpdateCaCdRestrictions()
+		#self.UpdateCaCdRestrictions()
 		self.RemoveRedundantRestrictions(data)
 	
 			
-	def UpdateCaCdRestrictions(self):
-		'''
-		idea is to loop through and remove the ca/cd from the days on which calculated
-		max or min stays can arrive/depart.
-		'''
-		
-
+# 	def UpdateCaCdRestrictions(self):
+# 		'''
+# 		idea is to loop through and remove the ca/cd from the days on which calculated
+# 		max or min stays can arrive/depart.
+# 		'''
+	
 	def FillMinStaysCoveringDay(self, maxEnd):
 		
 		for day in self.MinStayStartingOnDay:
@@ -88,6 +89,8 @@ class FinalRestrictions:
 				
 				elif day + d < data.ScheduleEnd:
 					self.MaxStayCoveringDay[day+d] = currentMax
+		
+		
 		
 		dates = list(self.MaxStayCoveringDay.keys())
 		dates.sort()

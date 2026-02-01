@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 # Import optimizer modules
 from optimizer import SolverRunner
+from optimizer.FeasibilitySolverRunner import FeasibilityRunner
 
 logging.basicConfig(
     level=logging.INFO,
@@ -55,9 +56,16 @@ def run_optimization_task(
         job.meta["progress"] = 0
         job.save_meta()
 
-        # Run the solver with the problem data
-        # SolverRunner.Run expects the full JSON payload
-        success, result = SolverRunner.Run(optimization_params)
+        # Route to appropriate solver based on input
+        # FeasibilityRunner handles scenarios with new reservations
+        if "NewReservations" in optimization_params and len(optimization_params.get("NewReservations", [])) > 0:
+            logger.info(f"Using FeasibilityRunner for problem {hotel_id} (has NewReservations)")
+            runner = FeasibilityRunner()
+            success, result = runner.Run(optimization_params, returnDict=True)
+        else:
+            logger.info(f"Using standard SolverRunner for problem {hotel_id}")
+            # SolverRunner.Run expects the full JSON payload
+            success, result = SolverRunner.Run(optimization_params, ReturnDict=True)
 
         if not success:
             logger.error(f"Optimization failed for {hotel_id}: {result}")

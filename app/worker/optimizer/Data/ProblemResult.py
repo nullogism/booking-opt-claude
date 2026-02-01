@@ -26,15 +26,31 @@ class ProblemResult:
 		self.TotalTime = 0.0
 		
 		self.ProblemId = problemId
-		
+		self.Message = ""
 		self.Succeeded = succeeded
+		self.NewReservationInfeasible = False
+		
 		self.ClosedArrivals = {} # these have the string date as the key
 		self.ClosedDepartures = {}
 		
 		self.MinStays = {}
+
 		self.MaxStays = {}
 		
 		self.OptimizedPlan = [] # array of assignment objects
+		
+		self.InitialPlanWithNewReservations = []
+		self.NewReservationsFitInInitialPlan = False
+		
+		
+		self.NonAdjacentAssignments = {} # dictionary of adjacency groups 
+										# and reservations that couldn't be 
+										# made adjacent
+		
+		self.InitialPlan = [] # array of assignment objects from the random plan
+		self.InitialMinStays = {}
+		self.QualityComparison = {}
+		self.RoomChangeComparison = {}
 		
 		self.ReOptimizedPlans = [] # dictionary of arrays
 								# these are the plans that resulted in 
@@ -43,7 +59,11 @@ class ProblemResult:
 		self.ScheduleStart = "" #date as YYYY-MM-DD string
 		self.ScheduleEnd = ""
 		self.Rooms = []
-
+		
+		self.StaysAvoidedByCa = {}
+		self.StaysAvoidedByCd = {}
+		self.StaysAvoidedByMax = {}
+		
 
 	def FillFromJson(self, jsonDict):
 		
@@ -63,6 +83,20 @@ class ProblemResult:
 			self.LoadOptimizedPlan(jsonDict["OptimizedPlan"])
 		except KeyError:
 			raise KeyError("Input data does not contain optimized plan")
+		except: 
+			raise 
+		
+		try:
+			self.LoadInitialPlanWithAllocation(jsonDict['InitialPlanWithNewReservations'])
+		except KeyError:
+			raise KeyError("Input data does not contain optimized plan")
+		except: 
+			raise 
+		
+		try:
+			self.LoadInitialPlan(jsonDict["InitialPlan"])
+		except KeyError:
+			self.InitialPlan = []
 		except: 
 			raise 
 		
@@ -113,6 +147,24 @@ class ProblemResult:
 					raise KeyError(f"Key {e} is not valid for assignments")
 				setattr(assgmnt, e, a[e])
 			self.OptimizedPlan.append(assgmnt)
+	
+	def LoadInitialPlan(self,randPlan):
+		for a in  randPlan:
+			assgmnt = Assignment()
+			for e in a:
+				if e not in assgmnt.__dict__.keys():
+					raise KeyError(f"Key {e} is not valid for assignments")
+				setattr(assgmnt, e, a[e])
+			self.InitialPlan.append(assgmnt)
+	
+	def LoadInitialPlanWithAllocation(self, assignments):
+		for a in  assignments:
+			assgmnt = Assignment()
+			for e in a:
+				if e not in assgmnt.__dict__.keys():
+					raise KeyError(f"Key {e} is not valid for assignments")
+				setattr(assgmnt, e, a[e])
+			self.InitialPlanWithNewReservations.append(assgmnt)
 	
 	def LoadRoomData(self, rooms):
 		for r in  rooms:
